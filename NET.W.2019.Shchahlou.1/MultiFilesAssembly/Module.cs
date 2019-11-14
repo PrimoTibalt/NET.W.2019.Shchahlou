@@ -4,7 +4,11 @@ using System.Text;
 
 namespace MultiFilesAssembly
 {
-    class Module
+    public class Module
     {
+        public static string Reader()
+        {
+            return Console.ReadLine();
+        }
     }
 }
