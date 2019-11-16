@@ -5,6 +5,12 @@ using System.Text;
 
 namespace NET.W._2019.Shchahlou._2
 {
+    //TO DO:
+    //1.Another 3 function from homework
+    //2.Comments for main methods
+    //3.README.md
+    //THE END
+    //(p.s. #region and another tags should be learned)
     public class Program
     {
         static void Main(string[] args)
