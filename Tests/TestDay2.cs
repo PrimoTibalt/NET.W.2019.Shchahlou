@@ -75,5 +75,30 @@ namespace Tests
             }
             return true;
         }
+
+        [TestMethod]
+        public void TestFindNthRoot()
+        {
+            var value1 = Program.FindNthRoot(1,5,0.0001f);
+            var value2 = Program.FindNthRoot(8,3,0.0001f);
+            var value0d1 = Program.FindNthRoot(0.001f,3,0.0001f);
+            var value0d45 = Program.FindNthRoot(0.04100625f,4,0.0001f);
+            var value2s = Program.FindNthRoot(8,3,0.0001f);
+            var value0d6 = Program.FindNthRoot(0.0279936f,7,0.0001f);
+            var value0d3 = Program.FindNthRoot(0.0081f,4,0.1f);
+            var value0d2 = Program.FindNthRoot(0.008f,3,0.1f);
+            var value0d545 = Program.FindNthRoot(0.004241979f,9,0.00000001f);
+
+            Assert.AreEqual(1.0, value1);
+            Assert.AreEqual(2.0, value2);
+            Assert.AreEqual(0.1, value0d1);
+            Assert.AreEqual(0.45, value0d45);
+            Assert.AreEqual(2.0, value2s);
+            Assert.AreEqual(0.6, value0d6);
+            Assert.AreEqual(0.3, value0d3);
+            Assert.AreEqual(0.2, value0d2);
+            Assert.AreEqual(0.545, value0d545);
+
+        }
     }
 }
