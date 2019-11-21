@@ -17,7 +17,7 @@ namespace NET.W._2019.Shchahlou._4
         /// <returns>GCD</returns>
         public static int EuclidGCD(int[] numbers, bool timeIt = false)
         {
-
+            int start = DateTime.Now.Millisecond;
             for (int num = 1; num < numbers.Length; num++)
             { 
                 int a = numbers[num];
@@ -37,6 +37,8 @@ namespace NET.W._2019.Shchahlou._4
                 }
                 numbers[num] = a;
             }
+            if (timeIt)
+                return DateTime.Now.Millisecond - start;
             return numbers[numbers.Length - 1];
         }
 
@@ -47,6 +49,7 @@ namespace NET.W._2019.Shchahlou._4
         /// <returns>GCD</returns>
         public static int BinaryEuclidGCD(int[] numbers, bool timeIt = false)
         {
+            int start = DateTime.Now.Millisecond;
             for (int num = 1; num < numbers.Length; num++)
             {
                 int a = numbers[num];
@@ -94,6 +97,8 @@ namespace NET.W._2019.Shchahlou._4
                 /* restore common factors of 2 */
                 numbers[num] = a << shift;
             }
+            if (timeIt)
+                return DateTime.Now.Millisecond - start;
             return numbers[numbers.Length - 1];
         }
     }
