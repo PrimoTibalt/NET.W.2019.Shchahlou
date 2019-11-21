@@ -46,6 +46,10 @@ namespace NET.W._2019.Shchahlou._4
         /// Use binary Euclid algorithms to find GCD of any count of input numbers.
         /// </summary>
         /// <param name="numbers"></param>
+        ///<param name = "timeIt" >
+        /// In case of input true, method will return time
+        /// in milliseconds to complete Euclid algorithm
+        /// </param>
         /// <returns>GCD</returns>
         public static int BinaryEuclidGCD(int[] numbers, bool timeIt = false)
         {
