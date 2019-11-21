@@ -10,19 +10,24 @@ namespace NET.W._2019.Shchahlou._4
         /// Use Euclid algorithms to find GCD of any count of input numbers.
         /// </summary>
         /// <param name="numbers"></param>
+        /// <param name="timeIt">
+        /// In case of input true, method will return time
+        /// in milliseconds to complete Euclid algorithm
+        /// </param>
         /// <returns>GCD</returns>
-        public static int EuclidGCD(params int[] numbers)
+        public static int EuclidGCD(int[] numbers, bool timeIt = false)
         {
+
             for (int num = 1; num < numbers.Length; num++)
             { 
                 int a = numbers[num];
                 int b = numbers[num-1];
-                /* GCD(0,v) == v; GCD(u,0) == u, GCD(0,0) == 0 */
+                /* GCD(0,b) == v; GCD(a,0) == u, GCD(0,0) == 0 */
                 if (a == 0) return a;
                 if (b == 0) return b;
 
                 if (a < 0 || b < 0)
-                    throw new ArgumentException("Null or negative number in input array!");
+                    throw new ArgumentException("Negative number in input array!");
                 while (a != b)
                 {
                     if (a > b)
@@ -30,16 +35,17 @@ namespace NET.W._2019.Shchahlou._4
                     else
                         b -= a;
                 }
-                numbers[num] = a;// a = b
+                numbers[num] = a;
             }
             return numbers[numbers.Length - 1];
         }
+
         /// <summary>
         /// Use binary Euclid algorithms to find GCD of any count of input numbers.
         /// </summary>
         /// <param name="numbers"></param>
         /// <returns>GCD</returns>
-        public static int BinaryEuclidGCD(params int[] numbers)
+        public static int BinaryEuclidGCD(int[] numbers, bool timeIt = false)
         {
             for (int num = 1; num < numbers.Length; num++)
             {
@@ -47,12 +53,12 @@ namespace NET.W._2019.Shchahlou._4
                 int b = numbers[num - 1];
                 int shift = 0;
 
-                /* GCD(0,v) == v; GCD(u,0) == u, GCD(0,0) == 0 */
-                if (a == 0) return a;
-                if (b == 0) return b;
+                /* GCD(0,b) == v; GCD(u,0) == u, GCD(0,0) == 0 */
+                if (a == 0) return b;
+                if (b == 0) return a;
 
                 /* Let shift = lg K, where K is the greatest power of 2
-                    dividing both u and v. */
+                   dividing both u and v. */
                 while (((a | b) & 1) == 0)
                 {
                     shift++;
@@ -72,9 +78,9 @@ namespace NET.W._2019.Shchahlou._4
                         b >>= 1;
 
                     /* Now u and v are both odd. Swap if necessary so u <= v,
-                        then set v = v - u (which is even). For bignums, the
-                         swapping is just pointer movement, and the subtraction
-                          can be done in-place. */
+                       then set v = v - u (which is even). For bignums, the
+                       swapping is just pointer movement, and the subtraction
+                       can be done in-place. */
                     if (a > b)
                     {
                         int t = b;
