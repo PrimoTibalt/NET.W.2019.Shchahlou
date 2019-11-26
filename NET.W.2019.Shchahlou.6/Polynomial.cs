@@ -35,5 +35,20 @@ namespace NET.W._2019.Shchahlou._6
             }
             return strPolynom.ToString();
         }
+
+        public static Polynomial operator+(Polynomial first, Polynomial second)
+        {
+            return new Polynomial();
+        }
+
+        public static Polynomial operator-(Polynomial first, Polynomial second)
+        {
+            return new Polynomial();
+        }
+
+        public static Polynomial operator *(Polynomial first, Polynomial second)
+        {
+            return new Polynomial();
+        }
     }
 }
