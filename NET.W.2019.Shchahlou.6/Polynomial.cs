@@ -48,14 +48,22 @@ namespace NET.W._2019.Shchahlou._6
 
             if (Polynomial.IsEmpty(this))
                 return "Polynom is empty.";
+
+            //Add coefficient with higest power in polynom.
             strPolynom.Append((polynom[polynom.Length-1] != 0) ?
                 $"({polynom[polynom.Length - 1]})x^{polynom.Length - 1}" : String.Empty);
+
+
             for(int power = polynom.Length-2; power >= 0 ; power--)
             {
+                //Last coefficient (with power=0) dont have 'x'
+                //and after him '=0' thats why we need another behavior.
                 if (power != 0)
                 {
+                    //If coefficient of some 'x' is 0 then we wouldn't show it.
                     if (polynom[power] == 0)
                         continue;
+
                     strPolynom.Append($"+({polynom[power]})x^{power}");
                 }
                 else
@@ -97,7 +105,14 @@ namespace NET.W._2019.Shchahlou._6
 
         public static Polynomial operator*(Polynomial first, Polynomial second)
         {
-            return new Polynomial();
+            int count = first.Length + second.Length - 1;
+            double[] resultCoef = new double[count];
+
+            for (int i = 0; i < first.Length; i++)
+                for (int j = 0; j < second.Length; j++)
+                   resultCoef[i + j] += first[i] * second[j];
+
+            return new Polynomial(resultCoef);
         }
     }
 }
