@@ -56,5 +56,21 @@ namespace NET.W._2019.Shchahlou._6
 
             return new Polynomial(resultCoef);
         }
+
+        public static bool operator ==(Polynomial first, Polynomial second)
+        {
+            if (first.Equals(second))
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator !=(Polynomial first, Polynomial second)
+        {
+            if (first.Equals(second))
+                return false;
+            else
+                return true;
+        }
     }
 }
