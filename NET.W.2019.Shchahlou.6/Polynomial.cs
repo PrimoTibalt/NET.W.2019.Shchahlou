@@ -25,13 +25,12 @@ namespace NET.W._2019.Shchahlou._6
         public override string ToString()
         {
             StringBuilder strPolynom = new StringBuilder();
-            for(int power = 0; power < polynom.Length; power++)
+            for(int power = polynom.Length-1; power >= 0 ; power--)
             {
-                strPolynom.Append($"{polynom[power]}x^{power}");
-                if (power != polynom.Length - 1)
-                    strPolynom.Append("+");
+                if (power != 0)
+                    strPolynom.Append($"({polynom[power]})x^{power}+");
                 else
-                    strPolynom.Append("=0");
+                    strPolynom.Append($"{polynom[power]}=0");
             }
             return strPolynom.ToString();
         }
