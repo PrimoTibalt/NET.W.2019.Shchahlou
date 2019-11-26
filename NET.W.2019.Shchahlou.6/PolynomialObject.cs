@@ -6,11 +6,17 @@ namespace NET.W._2019.Shchahlou._6
 {
     public sealed partial class Polynomial
     {
+        /// <summary>
+        /// Compare result of ToString methods.
+        /// </summary>
         public override bool Equals(object pol)
         {
             return this.ToString().Equals(pol.ToString());
         }
 
+        /// <summary>
+        /// HashCode result of ToString.
+        /// </summary>
         public override int GetHashCode()
         {
             //We could get 2 objects with same HashCode.
@@ -19,16 +25,23 @@ namespace NET.W._2019.Shchahlou._6
             return this.ToString().GetHashCode();
         }
         
+
+        /// <returns>
+        /// true - if every coefficient of pol is '0'.
+        /// false - if have at least one coefficient not equalt to '0'.
+        /// </returns>
         private static bool IsEmpty(Polynomial pol)
         {
             for(int i = 0; i < pol.Length; i++)
-            {
                 if (pol[i] != 0)
                     return false;
-            }
             return true;
         }
 
+        /// <summary>
+        /// With 'new Polinomial(10, 5, -3, 0);'
+        /// </summary>
+        /// <returns>'(-3)x^2+(5)x^1+(10)=0'</returns>
         public override string ToString()
         {
             StringBuilder strPolynom = new StringBuilder();

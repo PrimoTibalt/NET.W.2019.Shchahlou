@@ -4,6 +4,11 @@ using System.Text;
 
 namespace NET.W._2019.Shchahlou._6
 {
+    /// <summary>
+    /// Summarize, subtract and multiply Polynimials with this class.
+    /// Constructor gets your massive of coefficient.
+    /// Overrides objects methods.
+    /// </summary>
     public sealed partial class Polynomial
     {
         private double[] polynom;
