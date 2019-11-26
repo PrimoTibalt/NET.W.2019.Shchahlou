@@ -37,12 +37,19 @@ namespace NET.W._2019.Shchahlou._6
             StringBuilder strPolynom = new StringBuilder();
             for(int power = polynom.Length-1; power >= 0 ; power--)
             {
-                if (polynom[power] == 0)
-                    continue;
                 if (power != 0)
+                {
+                    if (polynom[power] == 0)
+                        continue;
                     strPolynom.Append($"({polynom[power]})x^{power}+");
+                }
                 else
-                    strPolynom.Append($"({polynom[power]})=0");
+                {
+                    if (polynom[power] != 0)
+                        strPolynom.Append($"({polynom[power]})=0");
+                    else
+                        strPolynom.Append("=0");
+                }
             }
             return strPolynom.ToString();
         }
