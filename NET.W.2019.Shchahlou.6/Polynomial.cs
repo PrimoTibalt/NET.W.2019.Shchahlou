@@ -65,12 +65,12 @@ namespace NET.W._2019.Shchahlou._6
 
         public static Polynomial operator-(Polynomial first, Polynomial second)
         {
-            List<double> fstCoefMinus = new List<double>();
+            List<double> secCoefMinus = new List<double>();
             for(int i = 0; i < first.Length; i++)
             {
-                fstCoefMinus.Add(-first[i]);
+                secCoefMinus.Add(-second[i]);
             }
-            return new Polynomial(fstCoefMinus.ToArray()) + second;
+            return new Polynomial(secCoefMinus.ToArray()) + first;
         }
 
         public static Polynomial operator*(Polynomial first, Polynomial second)
