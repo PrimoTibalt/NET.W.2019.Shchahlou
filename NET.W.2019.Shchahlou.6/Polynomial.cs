@@ -31,22 +31,37 @@ namespace NET.W._2019.Shchahlou._6
 
             return this.ToString().GetHashCode();
         }
+        
+        private static bool IsEmpty(Polynomial pol)
+        {
+            for(int i = 0; i < pol.Length; i++)
+            {
+                if (pol[i] != 0)
+                    return false;
+            }
+            return true;
+        }
 
         public override string ToString()
         {
             StringBuilder strPolynom = new StringBuilder();
-            for(int power = polynom.Length-1; power >= 0 ; power--)
+
+            if (Polynomial.IsEmpty(this))
+                return "Polynom is empty.";
+            strPolynom.Append((polynom[polynom.Length-1] != 0) ?
+                $"({polynom[polynom.Length - 1]})x^{polynom.Length - 1}" : String.Empty);
+            for(int power = polynom.Length-2; power >= 0 ; power--)
             {
                 if (power != 0)
                 {
                     if (polynom[power] == 0)
                         continue;
-                    strPolynom.Append($"({polynom[power]})x^{power}+");
+                    strPolynom.Append($"+({polynom[power]})x^{power}");
                 }
                 else
                 {
                     if (polynom[power] != 0)
-                        strPolynom.Append($"({polynom[power]})=0");
+                        strPolynom.Append($"+({polynom[power]})=0");
                     else
                         strPolynom.Append("=0");
                 }
