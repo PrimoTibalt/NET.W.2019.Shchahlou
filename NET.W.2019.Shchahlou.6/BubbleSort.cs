@@ -104,7 +104,7 @@ namespace NET.W._2019.Shchahlou._6
                     smallest1 = (val1 > smallest1) ? smallest1 : val1;
                 foreach (int val2 in arr2)
                     smallest2 = (val2 > smallest2) ? smallest2 : val2;
-                return smallest1 > smallest2;
+                return smallest1 < smallest2;
             }
             Sort(MinElementDecrease, ref M);
             return M;
