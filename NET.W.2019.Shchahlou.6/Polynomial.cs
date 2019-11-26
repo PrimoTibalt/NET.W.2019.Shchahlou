@@ -7,10 +7,16 @@ namespace NET.W._2019.Shchahlou._6
     public sealed class Polynomial
     {
         private double[] polynom;
+        public int Length;
+        public double this[int index]
+        {
+            get { return polynom[index]; }
+        }
         
         public Polynomial(params double[] coef)
         {
             polynom = coef;
+            Length = polynom.Length;
         }
 
         public override bool Equals(object pol)
@@ -43,12 +49,28 @@ namespace NET.W._2019.Shchahlou._6
 
         public static Polynomial operator+(Polynomial first, Polynomial second)
         {
-            return new Polynomial();
+            List<double> newCoef = new List<double>();
+            Polynomial lengthBig = (first.Length < second.Length) ? second : first;
+            Polynomial lengthSmall = (first.Length < second.Length) ? first : second;
+
+            for (int i = 0; i < lengthBig.Length; i++)
+            {
+                if (i < lengthSmall.Length)
+                    newCoef.Add(lengthBig[i] + lengthSmall[i]);
+                else
+                    newCoef.Add(lengthBig[i]);
+            }
+            return new Polynomial(newCoef.ToArray());
         }
 
         public static Polynomial operator-(Polynomial first, Polynomial second)
         {
-            return new Polynomial();
+            List<double> fstCoefMinus = new List<double>();
+            for(int i = 0; i < first.Length; i++)
+            {
+                fstCoefMinus.Add(-first[i]);
+            }
+            return new Polynomial(fstCoefMinus.ToArray()) + second;
         }
 
         public static Polynomial operator*(Polynomial first, Polynomial second)
