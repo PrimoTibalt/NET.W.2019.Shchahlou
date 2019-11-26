@@ -8,6 +8,7 @@ namespace Tests
     [TestClass]
     public class TestDay6
     {
+        #region Polynomial
         [TestMethod]
         public void TestToString()
         {
@@ -105,5 +106,285 @@ namespace Tests
             Assert.AreEqual("Polynom is empty.", v13.ToString());
             Assert.AreEqual("(25)x^6+(-100)x^5+(130)x^4+(-40)x^3+(-31)x^2+(12)x^1+(4)=0", v34.ToString());
         }
+        #endregion
+
+        #region BubbleSort
+
+        int[][] M1 = {
+                new int[]{ 1, 2, 3 },
+                new int[]{ 1, 2 },
+                new int[]{ 1, 4 }
+            };
+        int[][] M2 =
+        {
+                new int[]{1999, 2017, 9999, Int32.MinValue, Int32.MaxValue },
+                new int[]{ 2000, 200000, 0, 12, 7, 0, 20000, 2000},
+                new int[]{ 1},
+                new int[]{ 0},
+                new int[]{ -1}
+            };
+        int[][] M3 =
+        {
+                new int[]{ -123},
+                new int[]{ -123, 0},
+                new int[]{ 0, 0, 0}
+            };
+
+
+        delegate int[][] SortingMethod(int[][] M);
+        BubbleSort sort = new BubbleSort();
+
+
+
+        bool MatrixEqual(int[][] M1, int[][] M2)
+        {
+            try
+            {
+                for (int i = 0; i < M1.Length; i++)
+                    for (int j = 0; j < M1[i].Length; j++)
+                        if (M1[i][j] != M2[i][j])
+                            return false;
+                return true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
+        }
+
+        #region SumOfLines
+        [TestMethod]
+        public void TestAscendingSumOfLines()
+        {
+            //arrange
+            SortingMethod sm = sort.AscendingSumOfLines;
+            
+            int[][] M1r = {
+                new int[]{ 1, 2, 3 },
+                new int[]{ 1, 4 },
+                new int[]{ 1, 2 }
+            };
+            int[][] M2r =
+            {
+                new int[]{ 2000, 200000, 0, 12, 7, 0, 20000, 2000},
+                new int[]{ 1999, 2017, 9999, Int32.MinValue, Int32.MaxValue },
+                new int[]{ 1},
+                new int[]{ 0},
+                new int[]{ -1}
+            };
+            int[][] M3r =
+            {
+                new int[]{ 0, 0, 0},
+                new int[]{ -123},
+                new int[]{ -123, 0}
+            };
+
+            //act
+            int[][] newest1 = sm(M1);
+            int[][] newest2 = sm(M2);
+            int[][] newest3 = sm(M3);
+
+            //assert
+            Assert.IsTrue(MatrixEqual(newest1, M1r));
+            Assert.IsTrue(MatrixEqual(newest2, M2r));
+            Assert.IsTrue(MatrixEqual(newest3, M3r));
+        }
+
+        [TestMethod]
+        public void TestDecreasingSumOfLines()
+        {
+            //arrange
+            SortingMethod sm = sort.DecreasingSumOfLines;
+            
+
+            int[][] M1r = {
+                new int[]{ 1, 2 },
+                new int[]{ 1, 4 },
+                new int[]{ 1, 2, 3 }
+            };
+            int[][] M2r =
+            {
+                new int[]{ -1},
+                new int[]{ 0},
+                new int[]{ 1},
+                new int[]{ 1999, 2017, 9999, Int32.MinValue, Int32.MaxValue },
+                new int[]{ 2000, 200000, 0, 12, 7, 0, 20000, 2000}         
+            };
+            int[][] M3r =
+            {
+                new int[]{ -123},
+                new int[]{ -123, 0},
+                new int[]{ 0, 0, 0},
+            };
+
+            //act
+            int[][] newest1 = sm(M1);
+            int[][] newest2 = sm(M2);
+            int[][] newest3 = sm(M3);
+
+            //assert
+            Assert.IsTrue(MatrixEqual(newest1, M1r));
+            Assert.IsTrue(MatrixEqual(newest2, M2r));
+            Assert.IsTrue(MatrixEqual(newest3, M3r));
+        }
+        #endregion
+
+        #region MaxElementValue
+        [TestMethod]
+        public void TestAscendingMaxElementValue()
+        {
+            //arrange
+            SortingMethod sm = sort.AscendingMaxElementValue;
+            
+
+            int[][] M1r = {
+                new int[]{ 1, 4 },
+                new int[]{ 1, 2, 3 },
+                new int[]{ 1, 2 }
+            };
+            int[][] M2r =
+            {
+                new int[]{ 1999, 2017, 9999, Int32.MinValue, Int32.MaxValue },
+                new int[]{ 2000, 200000, 0, 12, 7, 0, 20000, 2000 },
+                new int[]{ 1},
+                new int[]{ 0},
+                new int[]{ -1}
+            };
+            int[][] M3r =
+            {
+                new int[]{ -123, 0},
+                new int[]{ 0, 0, 0},
+                new int[]{ -123},
+            };
+
+            //act
+            int[][] newest1 = sm(M1);
+            int[][] newest2 = sm(M2);
+            int[][] newest3 = sm(M3);
+
+            //assert
+            Assert.IsTrue(MatrixEqual(newest1, M1r));
+            Assert.IsTrue(MatrixEqual(newest2, M2r));
+            Assert.IsTrue(MatrixEqual(newest3, M3r));
+        }
+
+        [TestMethod]
+        public void TestDecreasingMaxElementValue()
+        {
+            //arrange
+            SortingMethod sm = sort.DecreasingMaxElementValue;
+            
+
+            int[][] M1r = {
+                new int[]{ 1, 2 },
+                new int[]{ 1, 2, 3 },
+                new int[]{ 1, 4 },
+            };
+            int[][] M2r =
+            {
+                new int[]{ -1},
+                new int[]{ 0},
+                new int[]{ 1},
+                new int[]{ 2000, 200000, 0, 12, 7, 0, 20000, 2000 },
+                new int[]{ 1999, 2017, 9999, Int32.MinValue, Int32.MaxValue },
+            };
+            int[][] M3r =
+            {
+                new int[]{ -123},
+                new int[]{ -123, 0},
+                new int[]{ 0, 0, 0},
+            };
+
+            //act
+            int[][] newest1 = sm(M1);
+            int[][] newest2 = sm(M2);
+            int[][] newest3 = sm(M3);
+
+            //assert
+            Assert.IsTrue(MatrixEqual(newest1, M1r));
+            Assert.IsTrue(MatrixEqual(newest2, M2r));
+            Assert.IsTrue(MatrixEqual(newest3, M3r));
+        }
+        #endregion
+
+        #region MinElementValue
+        [TestMethod]
+        public void TestAscendingMinElementValue()
+        {
+            //arrange
+            SortingMethod sm = sort.AscendingMinElementValue;
+
+            int[][] M1r = {
+                new int[]{ 1, 2, 3 },
+                new int[]{ 1, 2 },
+                new int[]{ 1, 4 }
+            };
+            int[][] M2r =
+            {
+                new int[]{ 1},
+                new int[]{ 2000, 200000, 0, 12, 7, 0, 20000, 2000},
+                new int[]{ 0},
+                new int[]{ -1},
+                new int[]{ 1999, 2017, 9999, Int32.MinValue, Int32.MaxValue },
+            };
+            int[][] M3r =
+            {
+                new int[]{ 0, 0, 0},
+                new int[]{ -123},
+                new int[]{ -123, 0}
+            };
+
+            //act
+            int[][] newest1 = sm(M1);
+            int[][] newest2 = sm(M2);
+            int[][] newest3 = sm(M3);
+
+            //assert
+            Assert.IsTrue(MatrixEqual(newest1, M1r));
+            Assert.IsTrue(MatrixEqual(newest2, M2r));
+            Assert.IsTrue(MatrixEqual(newest3, M3r));
+        }
+
+
+        [TestMethod]
+        public void TestDecreasingMinElementValue()
+        {
+            //arrange
+            SortingMethod sm = sort.DecreasingMinElementValue;
+
+
+            int[][] M1r = {
+                new int[]{ 1, 2, 3 },
+                new int[]{ 1, 2 },
+                new int[]{ 1, 4 }
+            };
+            int[][] M2r =
+            {
+                new int[]{ 1999, 2017, 9999, Int32.MinValue, Int32.MaxValue },
+                new int[]{ -1},
+                new int[]{ 2000, 200000, 0, 12, 7, 0, 20000, 2000},
+                new int[]{ 0},
+                new int[]{ 1}
+            };
+            int[][] M3r =
+            {
+                new int[]{ -123},
+                new int[]{ -123, 0},
+                new int[]{ 0, 0, 0},
+            };
+
+            //act
+            int[][] newest1 = sm(M1);
+            int[][] newest2 = sm(M2);
+            int[][] newest3 = sm(M3);
+
+            //assert
+            Assert.IsTrue(MatrixEqual(newest1, M1r));
+            Assert.IsTrue(MatrixEqual(newest2, M2r));
+            Assert.IsTrue(MatrixEqual(newest3, M3r));
+        }
+        #endregion
+
+        #endregion
     }
 }
