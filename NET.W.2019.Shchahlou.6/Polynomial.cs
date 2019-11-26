@@ -19,7 +19,7 @@ namespace NET.W._2019.Shchahlou._6
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.ToString().GetHashCode();
         }
 
         public override string ToString()
