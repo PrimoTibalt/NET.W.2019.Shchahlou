@@ -6,5 +6,6 @@ namespace NET.W._2019.Shchahlou._8
 {
     class BankAccount
     {
+
     }
 }
