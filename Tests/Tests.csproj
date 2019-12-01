@@ -17,6 +17,7 @@
     <ProjectReference Include="..\NET.W.2019.Shchahlou.2\NET.W.2019.Shchahlou.2.csproj" />
     <ProjectReference Include="..\NET.W.2019.Shchahlou.4\NET.W.2019.Shchahlou.4.csproj" />
     <ProjectReference Include="..\NET.W.2019.Shchahlou.6\NET.W.2019.Shchahlou.6.csproj" />
+    <ProjectReference Include="..\NET.W.2019.Shchahlou.8\NET.W.2019.Shchahlou.8.csproj" />
   </ItemGroup>
 
 </Project>
