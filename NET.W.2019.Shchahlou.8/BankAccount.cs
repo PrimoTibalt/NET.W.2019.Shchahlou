@@ -10,24 +10,24 @@ namespace NET.W._2019.Shchahlou._8
         Gold,
         Platinum,
     }
+
     [Serializable]
     public class BankAccount
     {
-        public readonly long id;
-        public string firstName;
-        public string lastName;
+        public readonly long Id;
+        public string FirstName;
+        public string LastName;
         public decimal Cash;
-        public Status status;
+        public Status Status;
         public int BonusBalls;
 
-        public BankAccount(long ID, string FirstName, string LastName, decimal StartCash, Status stat)
+        public BankAccount(long id, string firstName, string lastName, decimal startCash, Status stat)
         {
-            id = ID;
-            firstName = FirstName;
-            lastName = LastName;
-            Cash = StartCash;
-            status = stat;
+            this.Id = id;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Cash = startCash;
+            this.Status = stat;
         }
-
     }
 }

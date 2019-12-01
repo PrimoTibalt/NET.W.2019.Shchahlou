@@ -17,7 +17,6 @@ namespace QuickSortAndMergeSort
                 Console.WriteLine("{0}-{1} merge", newArr[i], i);
             }
             Console.ReadLine();
-
         }
     }
 }

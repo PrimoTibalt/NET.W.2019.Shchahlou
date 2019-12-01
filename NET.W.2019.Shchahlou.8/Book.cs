@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace NET.W._2019.Shchahlou._8
 {
     [Serializable]
@@ -14,39 +13,13 @@ namespace NET.W._2019.Shchahlou._8
         private int numberOfPages;
         private decimal cost;
 
-        public void ISBNSet(string value)
-        {
-            int sum = 0;
-            int koef = 10;
-            foreach (char ch in value)
-            {
-                if (!Char.IsDigit(ch) && ch != '-')
-                {
-                    throw new ArgumentException("ISBN");
-                }
-                else
-                {
-                    sum += int.Parse(ch.ToString()) * (koef--);
-                }
-            }
-
-            int lastIndex = int.Parse(value[value.Length - 1].ToString());
-            if (11 - (sum % 11) == lastIndex)
-            {
-                isbn = value;
-            }
-            else
-            {
-                throw new ArgumentException("ISBN");
-            }
-        }
-
         public string ISBNGet()
         {
             return isbn;
         }
 
-        public string Name {
+        public string Name
+        {
             get
             {
                 return name;
@@ -133,6 +106,33 @@ namespace NET.W._2019.Shchahlou._8
                 {
                     cost = value;
                 }
+            }
+        }
+
+        public void ISBNSet(string value)
+        {
+            int sum = 0;
+            int koef = 10;
+            foreach (char ch in value)
+            {
+                if (!char.IsDigit(ch) && ch != '-')
+                {
+                    throw new ArgumentException("ISBN");
+                }
+                else
+                {
+                    sum += int.Parse(ch.ToString()) * (koef--);
+                }
+            }
+
+            int lastIndex = int.Parse(value[value.Length - 1].ToString());
+            if (11 - (sum % 11) == lastIndex)
+            {
+                isbn = value;
+            }
+            else
+            {
+                throw new ArgumentException("ISBN");
             }
         }
 

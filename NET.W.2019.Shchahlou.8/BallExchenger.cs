@@ -6,14 +6,14 @@ namespace NET.W._2019.Shchahlou._8
 {
     public class BallExchenger
     {
-        public int Increase(decimal money)
+        public virtual int Increase(decimal money, Status percent)
         {
-            throw new NotImplementedException();
+            return (int)Math.Round(money * (int)percent);
         }
 
-        public int Decrease(decimal money)
+        public virtual int Decrease(decimal money, Status percent)
         {
-            throw new NotImplementedException();
+            return (int)Math.Round((money - 10) * (int)percent);
         }
     }
 }

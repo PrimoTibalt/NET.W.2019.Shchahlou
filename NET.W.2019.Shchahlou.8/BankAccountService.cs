@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace NET.W._2019.Shchahlou._8
 {
     public class BankAccountService
     {
         public BankAccount CurrentAccount;
-        public BallExchenger exchenger;
-        public IAccountStorage storage;
+        public BallExchenger Exchenger;
+        public IAccountStorage Storage;
 
         public void PutMoneyIntoTheAccount(decimal money)
         {
             CurrentAccount.Cash += money;
-            switch(CurrentAccount.status)
+
+            switch (CurrentAccount.Status)
             {
                 case Status.Base:
-                    exchenger.Increase(money, Status.Base);
+                    Exchenger.Increase(money, Status.Base);
                     break;
                 case Status.Gold:
                     break;
@@ -31,10 +29,10 @@ namespace NET.W._2019.Shchahlou._8
         public void WithdrawFromTheAccount(decimal money)
         {
             CurrentAccount.Cash -= money;
-            switch (CurrentAccount.status)
+            switch (CurrentAccount.Status)
             {
                 case Status.Base:
-                    exchenger.Decrease(money, Status.Base);
+                    Exchenger.Decrease(money, Status.Base);
                     break;
                 case Status.Gold:
                     break;
@@ -45,15 +43,10 @@ namespace NET.W._2019.Shchahlou._8
             }
         }
 
-        public void CreateNewAccount(string firstName, string lastName, decimal StartCash, Status stat)
+        public void CreateNewAccount(string firstName, string lastName, decimal startCash, Status stat)
         {
             Save(CurrentAccount);
-            CurrentAccount = new BankAccount(CurrentAccount.id + 1, firstName, lastName, StartCash, stat);
-        }
-
-        private void Save(BankAccount currentAccount)
-        {
-            storage.Store(currentAccount);
+            CurrentAccount = new BankAccount(CurrentAccount.Id + 1, firstName, lastName, startCash, stat);
         }
 
         public void CloseTheAccount()
@@ -63,7 +56,12 @@ namespace NET.W._2019.Shchahlou._8
 
         public void ChangeExchenger(BallExchenger type)
         {
-            exchenger = type;
+            Exchenger = type;
+        }
+
+        private void Save(BankAccount currentAccount)
+        {
+            Storage.Store(currentAccount);
         }
     }
 }

@@ -4,6 +4,11 @@ using System.Text;
 
 namespace NET.W._2019.Shchahlou._4
 {
+    /// <summary>
+    /// Contains 2 methods. 
+    /// Do the same but different ways(find GCD by Euclid and BinaryEuclid algorithms)
+    /// Also they have way to give time that they spend to find GCD.
+    /// </summary>
     public static class GCD
     {
         /// <summary>
@@ -15,6 +20,7 @@ namespace NET.W._2019.Shchahlou._4
         /// in milliseconds to complete Euclid algorithm
         /// </param>
         /// <returns>GCD</returns>
+       #region Classic Euclid
         public static int EuclidGCD(int[] numbers, bool timeIt = false)
         {
             int start = DateTime.Now.Millisecond;
@@ -41,6 +47,8 @@ namespace NET.W._2019.Shchahlou._4
                 return DateTime.Now.Millisecond - start;
             return numbers[numbers.Length - 1];
         }
+        #endregion
+
 
         /// <summary>
         /// Use binary Euclid algorithms to find GCD of any count of input numbers.
@@ -51,6 +59,7 @@ namespace NET.W._2019.Shchahlou._4
         /// in milliseconds to complete Euclid algorithm
         /// </param>
         /// <returns>GCD</returns>
+        #region
         public static int BinaryEuclidGCD(int[] numbers, bool timeIt = false)
         {
             int start = DateTime.Now.Millisecond;
@@ -105,5 +114,8 @@ namespace NET.W._2019.Shchahlou._4
                 return DateTime.Now.Millisecond - start;
             return numbers[numbers.Length - 1];
         }
+        #endregion
+
+
     }
 }
