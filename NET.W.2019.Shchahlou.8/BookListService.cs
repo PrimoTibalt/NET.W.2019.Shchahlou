@@ -130,7 +130,5 @@ namespace NET.W._2019.Shchahlou._8
                 storage.DeleteFromStorage(BookListStorage.FileType.Binary, booksToRemove.ToArray());
             }
         }
-
-        
     }
 }

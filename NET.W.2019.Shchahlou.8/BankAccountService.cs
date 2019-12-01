@@ -8,7 +8,8 @@ namespace NET.W._2019.Shchahlou._8
     public class BankAccountService
     {
         public BankAccount CurrentAccount;
-
+        public BallExchenger exchenger;
+        public IAccountStorage storage;
 
         public void PutMoneyIntoTheAccount(decimal money)
         {
@@ -16,7 +17,7 @@ namespace NET.W._2019.Shchahlou._8
             switch(CurrentAccount.status)
             {
                 case Status.Base:
-
+                    exchenger.Increase(money, Status.Base);
                     break;
                 case Status.Gold:
                     break;
@@ -33,7 +34,7 @@ namespace NET.W._2019.Shchahlou._8
             switch (CurrentAccount.status)
             {
                 case Status.Base:
-
+                    exchenger.Decrease(money, Status.Base);
                     break;
                 case Status.Gold:
                     break;
@@ -52,19 +53,17 @@ namespace NET.W._2019.Shchahlou._8
 
         private void Save(BankAccount currentAccount)
         {
-            BinaryFormatter binFormatter = new BinaryFormatter();
-            using (FileStream file = new FileStream(@"BankAccounts.bin", FileMode.Create))
-            {
-                using (BinaryWriter writter = new BinaryWriter(file))
-                {
-                    binFormatter.Serialize(file, currentAccount);
-                }
-            }
+            storage.Store(currentAccount);
         }
 
         public void CloseTheAccount()
         {
             CurrentAccount = null;
+        }
+
+        public void ChangeExchenger(BallExchenger type)
+        {
+            exchenger = type;
         }
     }
 }
