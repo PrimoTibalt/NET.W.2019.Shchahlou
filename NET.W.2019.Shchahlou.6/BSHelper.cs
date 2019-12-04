@@ -9,10 +9,11 @@ namespace NET.W._2019.Shchahlou._6
         public static int Sum(this int[] arr)
         {
             int sum = 0;
-            foreach(int a in arr)
+            foreach (int a in arr)
             {
                 sum += a;
             }
+
             return sum;
         }
     }
