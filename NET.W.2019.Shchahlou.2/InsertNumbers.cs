@@ -12,20 +12,23 @@ namespace NET.W._2019.Shchahlou._2
         /// </summary>
         /// <param name="numberSource">Where will be inserted</param>
         /// <param name="numberIn">What will be inserted</param>
-        /// <param name="i">The beggining of the place where we insert</param>
+        /// <param name="i">The beginning of the place where we insert</param>
         /// <param name="j">The end</param>
-        /// <returns>the integer, which represents denery from the bits</returns>
+        /// <returns>the integer, which represents denary from the bits</returns>
         public static long? InsertNumbers(int numberSource, int numberIn, int i, int j)
         {
             BitArray bitSource = new BitArray(new int[] { numberSource });
             BitArray bitIn = new BitArray(new int[] { numberIn });
             if (i > j)
+            {
                 return null;
+            }
 
             for (int num = i; num < j; num++)
             {
                 bitSource[num] = bitIn[num - i];
             }
+
             int[] zeroIsResult = new int[1];
             bitSource.CopyTo(zeroIsResult, 0);
             return zeroIsResult[0];

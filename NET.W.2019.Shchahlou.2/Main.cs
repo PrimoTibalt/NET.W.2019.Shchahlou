@@ -1,6 +1,4 @@
-﻿
-
-namespace NET.W._2019.Shchahlou._2
+﻿namespace NET.W._2019.Shchahlou._2
 {
     public class MainCls
     {
