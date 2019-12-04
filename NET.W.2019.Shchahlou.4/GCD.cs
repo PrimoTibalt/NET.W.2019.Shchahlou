@@ -89,7 +89,7 @@ namespace NET.W._2019.Shchahlou._4
                 int b = numbers[num - 1];
                 int shift = 0;
 
-                /* GCD(0,b) == v; GCD(a,0) == u, GCD(0,0) == 0 */
+                /* GCD(0,b) == b; GCD(a,0) == a, GCD(0,0) == 0 */
                 if (a == 0)
                 {
                     return b;
