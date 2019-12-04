@@ -17,9 +17,9 @@ namespace Tests
             int[] value1 = { 7, 9, 13, 23, 28, 12, 12 };
 
             //act
-            int v5 = GCD.EuclidGCD(value5);
-            int v3 = GCD.EuclidGCD(value3);
-            int v1 = GCD.EuclidGCD(value1);
+            long v5 = GCD.EuclidGCD(value5);
+            long v3 = GCD.EuclidGCD(value3);
+            long v1 = GCD.EuclidGCD(value1);
 
             //assert
             Assert.ThrowsException<ArgumentException>(()=>GCD.EuclidGCD(valueException));
@@ -38,9 +38,9 @@ namespace Tests
             int[] value1 = { 7, 9, 13, 23, 28, 12, 12 };
 
             //act
-            int v5 = GCD.BinaryEuclidGCD(value5);
-            int v3 = GCD.BinaryEuclidGCD(value3);
-            int v1 = GCD.BinaryEuclidGCD(value1);
+            long v5 = GCD.BinaryEuclidGCD(value5);
+            long v3 = GCD.BinaryEuclidGCD(value3);
+            long v1 = GCD.BinaryEuclidGCD(value1);
 
             //assert
             Assert.ThrowsException<ArgumentException>(() => GCD.EuclidGCD(valueException));
