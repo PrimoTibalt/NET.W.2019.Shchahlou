@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuickSortAndMergeSort
 {
-    class MergeSort
+    public class MergeSort
     {
         public static void Sort(int[] input, int low, int high)
         {
@@ -22,9 +22,28 @@ namespace QuickSortAndMergeSort
             Sort(input, 0, input.Length - 1);
         }
 
+        public static string PrintArray(int[] input)
+        {
+            string result = string.Empty;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                result = result + input[i] + " ";
+            }
+
+            if (input.Length == 0)
+            {
+                result = "Array is empty.";
+                return result;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
         private static void Merge(int[] input, int low, int middle, int high)
         {
-
             int left = low;
             int right = middle + 1;
             int[] tmp = new int[(high - low) + 1];
@@ -35,14 +54,15 @@ namespace QuickSortAndMergeSort
                 if (input[left] < input[right])
                 {
                     tmp[tmpIndex] = input[left];
-                    left = left + 1;
+                    left++;
                 }
                 else
                 {
                     tmp[tmpIndex] = input[right];
-                    right = right + 1;
+                    right++;
                 }
-                tmpIndex = tmpIndex + 1;
+
+                tmpIndex++;
             }
 
             if (left <= middle)
@@ -50,8 +70,8 @@ namespace QuickSortAndMergeSort
                 while (left <= middle)
                 {
                     tmp[tmpIndex] = input[left];
-                    left = left + 1;
-                    tmpIndex = tmpIndex + 1;
+                    left++;
+                    tmpIndex++;
                 }
             }
 
@@ -60,34 +80,14 @@ namespace QuickSortAndMergeSort
                 while (right <= high)
                 {
                     tmp[tmpIndex] = input[right];
-                    right = right + 1;
-                    tmpIndex = tmpIndex + 1;
+                    right++;
+                    tmpIndex++;
                 }
             }
 
             for (int i = 0; i < tmp.Length; i++)
             {
                 input[low + i] = tmp[i];
-            }
-
-        }
-
-        public static string PrintArray(int[] input)
-        {
-            string result = String.Empty;
-
-            for (int i = 0; i < input.Length; i++)
-            {
-                result = result + input[i] + " ";
-            }
-            if (input.Length == 0)
-            {
-                result = "Array is empty.";
-                return result;
-            }
-            else
-            {
-                return result;
             }
         }
     }

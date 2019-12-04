@@ -2,9 +2,9 @@
 
 namespace QuickSortAndMergeSort
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             int[] arr = { 4, 7, 3, 5, 8 };
             QuickSort.Sort(arr, 0, arr.Length - 1);
@@ -16,6 +16,7 @@ namespace QuickSortAndMergeSort
                 Console.WriteLine("{0}-{1} quick", arr[i], i);
                 Console.WriteLine("{0}-{1} merge", newArr[i], i);
             }
+
             Console.ReadLine();
         }
     }
