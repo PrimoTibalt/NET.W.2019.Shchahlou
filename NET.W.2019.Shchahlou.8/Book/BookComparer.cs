@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace NET.W._2019.Shchahlou._8
 {
-    class BookYearComparer<T> : IComparer<T>
+    public class BookYearComparer<T> : IComparer<T>
         where T : Book
     {
         public int Compare(T x, T y)
@@ -13,7 +11,7 @@ namespace NET.W._2019.Shchahlou._8
         }
     }
 
-    class BookCostComparer<T> : IComparer<T>
+    public class BookCostComparer<T> : IComparer<T>
         where T : Book
     {
         public int Compare(T x, T y)
@@ -21,6 +19,4 @@ namespace NET.W._2019.Shchahlou._8
             return x.Cost.CompareTo(y.Cost);
         }
     }
-
-    //Could be more classes but what reason?
 }

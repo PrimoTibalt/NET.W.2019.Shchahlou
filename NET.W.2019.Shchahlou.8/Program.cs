@@ -6,7 +6,6 @@ namespace NET.W._2019.Shchahlou._8
     {
         public static void Main(string[] args)
         {
-
         }
     }
 }

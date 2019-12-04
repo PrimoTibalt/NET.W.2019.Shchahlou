@@ -4,9 +4,11 @@ namespace NET.W._2019.Shchahlou._8
 {
     public class BankAccountService
     {
-        public BankAccount CurrentAccount;
-        public BallExchenger Exchenger;
-        public IAccountStorage Storage;
+        public BankAccount CurrentAccount { get; set; }
+
+        public IAccountStorage Storage { get; set; }
+
+        private BallExchenger Exchenger { get; set; }
 
         public void PutMoneyIntoTheAccount(decimal money)
         {
@@ -49,9 +51,12 @@ namespace NET.W._2019.Shchahlou._8
             CurrentAccount = new BankAccount(CurrentAccount.Id + 1, firstName, lastName, startCash, stat);
         }
 
-        public void CloseTheAccount()
+        public void FreezeTheAccount()
         {
-            CurrentAccount = null;
+            if (CurrentAccount.Cash >= 0)
+            {
+                CurrentAccount = null;
+            }
         }
 
         public void ChangeExchenger(BallExchenger type)

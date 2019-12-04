@@ -11,12 +11,28 @@ namespace NET.W._2019.Shchahlou._8
 
     public class BinaryStorage : IAccountStorage
     {
-        public string FilePath = "Account.bin";
+        private string filePath = AppDomain.CurrentDomain.BaseDirectory + @"Account.bin";
+
+        public string FilePath
+        {
+            get
+            {
+                return filePath;
+            }
+
+            set
+            {
+                if (File.Exists(value))
+                {
+                    filePath = value;
+                }
+            }
+        }
 
         public void Store(BankAccount ba)
         {
             BinaryFormatter binFormatter = new BinaryFormatter();
-            using (FileStream file = new FileStream(@FilePath, FileMode.OpenOrCreate))
+            using (FileStream file = new FileStream(@filePath, FileMode.OpenOrCreate))
             {
                 using (BinaryWriter writter = new BinaryWriter(file))
                 {

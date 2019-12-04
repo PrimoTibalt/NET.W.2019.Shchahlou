@@ -6,17 +6,18 @@ namespace NET.W._2019.Shchahlou._8
     public class Book : IComparable
     {
         private string isbn;
-        private string name;
-        private string author;
-        private short year;
-        private string publisher;
-        private int numberOfPages;
-        private decimal cost;
 
-        public string ISBNGet()
-        {
-            return isbn;
-        }
+        private string name;
+
+        private string author;
+
+        private short year;
+
+        private string publisher;
+
+        private int numberOfPages;
+
+        private decimal cost;
 
         public string Name
         {
@@ -24,54 +25,77 @@ namespace NET.W._2019.Shchahlou._8
             {
                 return name;
             }
+
             set
             {
                 if (!string.IsNullOrWhiteSpace(value))
+                {
                     name = value;
+                }
                 else
+                {
                     throw new ArgumentException("Name");
+                }
             }
         }
 
-        public string Author {
+        public string Author 
+        {
             get
             {
                 return author;
             }
+
             set
             {
                 if (!string.IsNullOrWhiteSpace(value))
+                {
                     author = value;
+                }
                 else
+                {
                     author = "Author(s) is(are) unknown.";
+                }
             }
         }
 
-        public short Year {
+        public short Year 
+        {
             get
             {
                 return year;
             }
+
             set
             {
                 if (value >= 0 && value <= DateTime.Now.Year)
+                {
                     year = value;
+                }
                 else
+                {
                     throw new ArgumentException("Year");
+                }
             }
         }
 
-        public string Publisher {
+        public string Publisher 
+        {
             get
             {
                 return publisher;
             }
+
             set
             {
                 if (!string.IsNullOrWhiteSpace(value))
+                {
                     publisher = value;
+                }
                 else
+                {
                     publisher = "Without publisher.";
+                }
             }
         }
 
@@ -81,12 +105,17 @@ namespace NET.W._2019.Shchahlou._8
             {
                 return numberOfPages;
             }
+
             set
             {
                 if (value > 0)
+                {
                     numberOfPages = value;
+                }
                 else
+                {
                     throw new ArgumentException("NumberOfPages");
+                }
             }
         }
 
@@ -96,6 +125,7 @@ namespace NET.W._2019.Shchahlou._8
             {
                 return cost;
             }
+
             set
             {
                 if (value < 0)
@@ -107,6 +137,26 @@ namespace NET.W._2019.Shchahlou._8
                     cost = value;
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return author + " " + name + " " + year.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return isbn.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj.GetHashCode() == this.GetHashCode();
+        }
+
+        public string ISBNGet()
+        {
+            return isbn;
         }
 
         public void ISBNSet(string value)
@@ -133,28 +183,6 @@ namespace NET.W._2019.Shchahlou._8
             else
             {
                 throw new ArgumentException("ISBN");
-            }
-        }
-
-        public override string ToString()
-        {
-            return author + " " + name + " " + year.ToString();
-        }
-
-        public override int GetHashCode()
-        {
-            return isbn.GetHashCode();
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj.GetHashCode() == this.GetHashCode())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
