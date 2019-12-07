@@ -1,135 +1,45 @@
-﻿using System;
-
-
-namespace NET.W._2019.Shchahlou._10
+﻿namespace NET.W._2019.Shchahlou._10
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Structure with methods to sort jugged array by some feature.
     /// </summary>
     public struct BubbleSort
     {
+        public delegate int Comparator(int[] x, int[] y);
+
         /// <summary>
-        /// Delegate, which incapsulates logic to compare 
-        /// massives number1 and number2
+        /// Call Sort with input type of sorting(integer Comparator(integer[], integer[])) and Matrix to sort
+        /// This method sorts lines in array, not elements.
         /// </summary>
-        /// <param name="n1"></param>
-        /// <param name="n2"></param>
-        /// <returns></returns>
-        private delegate bool DoBubble(int[] n1, int[] n2);
-
-        public int[][] AscendingSumOfLines(params int[][] M)
+        /// <param name="comp">Some integer Method_Name(integer[], integer[]) for one line arrays</param>
+        /// <param name="m">Jugged array to sort</param>
+        /// <returns>Sorted jugged array</returns>
+        public int[][] SortByComparator(Comparator comp, params int[][] m)
         {
-            static bool BiggestSum(int[] arr1, int[] arr2)
-            {
-                return arr1.Sum() > arr2.Sum();
-            }
-
-            Sort(BiggestSum, ref M);
-            return M;
+            Sort(comp, ref m);
+            return m;
         }
 
-        public int[][] DecreasingSumOfLines(params int[][] M)
+        /// <summary>
+        /// Call Sort with input type of sorting(IComparer) and Matrix to sort
+        /// This method sorts lines in array, not elements.
+        /// </summary>
+        /// <param name="type">Some comparer for one line arrays</param>
+        /// <param name="m">Jugged array to sort</param>
+        /// <returns>Sorted jugged array</returns>
+        public int[][] SortByComparer(IComparer<int[]> type, params int[][] m)
         {
-            static bool SmallestSum(int[] arr1, int[] arr2)
-            {
-                return arr1.Sum() < arr2.Sum();
-            }
-
-            Sort(SmallestSum, ref M);
-            return M;
+            Sort(type, ref m);
+            return m;
         }
 
-        public int[][] AscendingMaxElementValue(params int[][] M)
-        {
-            static bool BiggestElementIncrease(int[] arr1, int[] arr2)
-            {
-                int biggest1 = Int32.MinValue;
-                int biggest2 = Int32.MinValue;
-                foreach (int val1 in arr1)
-                {
-                    biggest1 = (val1 > biggest1) ? val1 : biggest1;
-                }
-
-                foreach (int val2 in arr2)
-                {
-                    biggest2 = (val2 > biggest2) ? val2 : biggest2;
-                }
-
-                return biggest1 > biggest2;
-            }
-            Sort(BiggestElementIncrease, ref M);
-            return M;
-        }
-
-        public int[][] DecreasingMaxElementValue(params int[][] M)
-        {
-            static bool BiggestElementDecrease(int[] arr1, int[] arr2)
-            {
-                int biggest1 = Int32.MinValue;
-                int biggest2 = Int32.MinValue;
-                foreach (int val1 in arr1)
-                {
-                    biggest1 = (val1 > biggest1) ? val1 : biggest1;
-                }
-
-                foreach (int val2 in arr2)
-                {
-                    biggest2 = (val2 > biggest2) ? val2 : biggest2;
-                }
-
-                return biggest1 < biggest2;
-            }
-
-            Sort(BiggestElementDecrease, ref M);
-            return M;
-        }
-
-        public int[][] AscendingMinElementValue(params int[][] M)
-        {
-            static bool MinElementIncrease(int[] arr1, int[] arr2)
-            {
-                int smallest1 = Int32.MaxValue;
-                int smallest2 = Int32.MaxValue;
-                foreach (int val1 in arr1)
-                {
-                    smallest1 = (val1 > smallest1) ? smallest1 : val1;
-                }
-
-                foreach (int val2 in arr2)
-                {
-                    smallest2 = (val2 > smallest2) ? smallest2 : val2;
-                }
-
-                return smallest1 > smallest2;
-            }
-
-            Sort(MinElementIncrease, ref M);
-            return M;
-        }
-
-        public int[][] DecreasingMinElementValue(params int[][] M)
-        {
-            static bool MinElementDecrease(int[] arr1, int[] arr2)
-            {
-                int smallest1 = int.MaxValue;
-                int smallest2 = int.MaxValue;
-                foreach (int val1 in arr1)
-                {
-                    smallest1 = (val1 > smallest1) ? smallest1 : val1;
-                }
-
-                foreach (int val2 in arr2)
-                {
-                    smallest2 = (val2 > smallest2) ? smallest2 : val2;
-                }
-
-                return smallest1 < smallest2;
-            }
-
-            Sort(MinElementDecrease, ref M);
-            return M;
-        }
-
+        /// <summary>
+        /// Swap of parameters by reference
+        /// </summary>
+        /// <param name="obj1"></param>
+        /// <param name="obj2"></param>
         private static void Bubble(ref int[] obj1, ref int[] obj2)
         {
             int[] temp = obj1;
@@ -137,16 +47,43 @@ namespace NET.W._2019.Shchahlou._10
             obj2 = temp;
         }
 
-        private static void Sort(DoBubble inCase, ref int[][] M)
+        /// <summary>
+        /// Goes through the Matrix lines Matrix.Length times
+        /// Sort it's by BubbleSort in addition of inCase parameter.
+        /// </summary>
+        /// <param name="comp">IComparer</param>
+        /// <param name="m">jugged array</param>
+        private static void Sort(IComparer<int[]> comp, ref int[][] m)
         {
-            int Len = M.Length;
-            for (int i = 0; i < Len; i++)
+            int len = m.Length;
+            for (int i = 0; i < len; i++)
             {
-                for (int j = 1; j < Len; j++)
+                for (int j = 1; j < len; j++)
                 {
-                    if (inCase.Invoke(M[j], M[j - 1]))
+                    if (comp.Compare(m[j], m[j - 1]) == -1)
                     {
-                        Bubble(ref M[j], ref M[j - 1]);
+                        Bubble(ref m[j], ref m[j - 1]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Goes through the Matrix lines Matrix.Length times
+        /// Sort it's by BubbleSort in addition of inCase parameter.
+        /// </summary>
+        /// <param name="comp">integer Comparator(integer[], integer[])</param>
+        /// <param name="m">jugged array</param>
+        private static void Sort(Comparator comp, ref int[][] m)
+        {
+            int len = m.Length;
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = 1; j < len; j++)
+                {
+                    if (comp(m[j], m[j - 1]) == 1)
+                    {
+                        Bubble(ref m[j], ref m[j - 1]);
                     }
                 }
             }
