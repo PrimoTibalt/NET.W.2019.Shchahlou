@@ -18,6 +18,16 @@ namespace NET.W._2019.Shchahlou._10
             BinaryEuclid,
         }
 
+        /// <summary>
+        /// Calculate GCD of parameters and returns the resualt or the time
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="parameters"></param>
+        /// <param name="timeIt">
+        /// In case of input true, method will return time
+        /// in milliseconds to complete Euclid algorithm
+        /// </param>
+        /// <returns></returns>
         public long FindGCD(Algorithm version, int[] parameters, bool timeIt = false)
         {
             long result;
