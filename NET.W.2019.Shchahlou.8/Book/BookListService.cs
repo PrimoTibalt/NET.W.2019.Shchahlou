@@ -22,10 +22,14 @@ namespace NET.W._2019.Shchahlou._8
 
         public BookListService(Book[] books, string filePathForStorage = null)
         {
-            collection = new List<Book>(books);
-            booksToAdd = new List<Book>(books);
+            collection = new List<Book>();
+            booksToAdd = new List<Book>();
             booksToRemove = new List<Book>();
             storage = new BookListStorage(filePathForStorage, BookListStorage.FileType.Binary);
+            foreach (Book b in books)
+            {
+                this.AddBook(b);
+            }
         }
 
         public void AddBook(Book newBook)
@@ -144,6 +148,16 @@ namespace NET.W._2019.Shchahlou._8
                 storage.AddToStorage(BookListStorage.FileType.Binary, booksToAdd.ToArray());
                 storage.DeleteFromStorage(BookListStorage.FileType.Binary, booksToRemove.ToArray());
             }
+        }
+
+        public void ShowLocal()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowStorage()
+        {
+            throw new NotImplementedException();
         }
 
         private bool HaveBookInCol(Book book)
