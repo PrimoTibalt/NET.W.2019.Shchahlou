@@ -161,7 +161,7 @@ namespace NET.W._2019.Shchahlou._10
             int sum = 0;
             bool even = false;
             char ch;
-            for (int i = 0; i < value.Length-1; i++)
+            for (int i = 0; i < value.Length - 1; i++)
             {
                 ch = value[i];
                 if (!char.IsDigit(ch) && ch != '-' && ch != ' ')
@@ -175,7 +175,7 @@ namespace NET.W._2019.Shchahlou._10
                         continue;
                     }
 
-                    sum += int.Parse(ch.ToString()) * ((!even)? 1 : 3);
+                    sum += int.Parse(ch.ToString()) * ((!even) ? 1 : 3);
                     even = !even;
                 }
             }
@@ -192,7 +192,7 @@ namespace NET.W._2019.Shchahlou._10
         }
 
         /// <summary>
-        /// Calls string ToString(format: "N", provider: CultureInfor.CurrentCulture)
+        /// Calls string ToString(format: "N", provider: CultureInfo.CurrentCulture)
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -204,7 +204,7 @@ namespace NET.W._2019.Shchahlou._10
         /// A - author
         /// N - name
         /// W - publisher
-        /// I - isbn
+        /// I - ISBN
         /// Y - year
         /// P - number of pages
         /// C - cost
@@ -220,7 +220,7 @@ namespace NET.W._2019.Shchahlou._10
         /// A - author
         /// N - name
         /// W - publisher
-        /// I - isbn
+        /// I - ISBN
         /// Y - year
         /// P - number of pages
         /// C - cost
@@ -230,7 +230,7 @@ namespace NET.W._2019.Shchahlou._10
         /// <returns>Formatted information about book</returns>
         public string ToString(string format, IFormatProvider provider)
         {
-            if (String.IsNullOrEmpty(format))
+            if (string.IsNullOrEmpty(format))
             {
                 format = "N";
             }
@@ -271,9 +271,16 @@ namespace NET.W._2019.Shchahlou._10
                         break;
                 }
             }
+
             return result.ToString();
         }
 
+        /// <summary>
+        /// Standart comparator compares year of the books
+        /// bigger year -> bigger Book in comparision
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         int IComparable.CompareTo(object obj)
         {
             Book secondBook = obj as Book;
