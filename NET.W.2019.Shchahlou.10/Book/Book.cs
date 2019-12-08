@@ -141,21 +141,38 @@ namespace NET.W._2019.Shchahlou._10
             }
         }
 
+        /// <summary>
+        /// ISBN is unique for every book, makes hash from string of ISBN 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return isbn.GetHashCode();
         }
 
+        /// <summary>
+        /// Checks hash codes of Books
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             return obj.GetHashCode() == this.GetHashCode();
         }
 
+        /// <summary>
+        /// Getter method for ISBN
+        /// </summary>
+        /// <returns>ISBN as it was gave</returns>
         public string ISBNGet()
         {
             return isbn;
         }
 
+        /// <summary>
+        /// Checks does value is correct of ISBN 13
+        /// </summary>
+        /// <param name="value">ISBN</param>
         public void ISBNSet(string value)
         {
             int sum = 0;
@@ -276,8 +293,8 @@ namespace NET.W._2019.Shchahlou._10
         }
 
         /// <summary>
-        /// Standart comparator compares year of the books
-        /// bigger year -> bigger Book in comparision
+        /// Base comparator compares year of the books
+        /// bigger year -> bigger Book in orderliness
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
