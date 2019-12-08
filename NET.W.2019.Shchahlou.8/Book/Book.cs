@@ -5,7 +5,7 @@ namespace NET.W._2019.Shchahlou._8
     [Serializable]
     public class Book : IComparable
     {
-        private string isbn;
+        private string isbn = "000-0000000000";
 
         private string name;
 
@@ -162,21 +162,29 @@ namespace NET.W._2019.Shchahlou._8
         public void ISBNSet(string value)
         {
             int sum = 0;
-            int koef = 10;
-            foreach (char ch in value)
+            bool even = false;
+            char ch;
+            for (int i = 0; i < value.Length-1; i++)
             {
-                if (!char.IsDigit(ch) && ch != '-')
+                ch = value[i];
+                if (!char.IsDigit(ch) && ch != '-' && ch != ' ')
                 {
                     throw new ArgumentException("ISBN");
                 }
                 else
                 {
-                    sum += int.Parse(ch.ToString()) * (koef--);
+                    if (char.IsWhiteSpace(ch) || ch == '-')
+                    {
+                        continue;
+                    }
+
+                    sum += int.Parse(ch.ToString()) * ((!even)? 1 : 3);
+                    even = !even;
                 }
             }
 
             int lastIndex = int.Parse(value[value.Length - 1].ToString());
-            if (11 - (sum % 11) == lastIndex)
+            if (10 - (sum % 10) == lastIndex)
             {
                 isbn = value;
             }
