@@ -1,12 +1,51 @@
-﻿using System;
-
-namespace NET.W._2019.Shchahlou._10
+﻿namespace NET.W._2019.Shchahlou._10
 {
-    class Program
+    using System;
+    using NET.W._2019.Shchahlou._10.SortComparer;
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("---------BubbleTesting---------");
+            BubbleTesting();
+            Console.WriteLine("---------BookTesting---------");
+            BookTesting();
+        }
+
+        public static void BookTesting()
+        {
+            Book richter = new Book()
+            {
+                Author = "Jeffrey Richter",
+                Name = "CLR via C#",
+                Cost = 59.99M,
+                NumberOfPages = 826,
+                Publisher = "Microsoft Press",
+                Year = 2012,
+            };
+            richter.ISBNSet("978-0-7356-6745-7");
+            Console.WriteLine(richter.ToString("A, N"));
+            Console.WriteLine(richter.ToString("A, n, w, y"));
+            Console.WriteLine(richter.ToString("I, A, N, W, Y, p, C"));
+        }
+
+        public static void BubbleTesting()
+        {
+            BubbleSort sort = new BubbleSort();
+            int[][] M = new int[5][]
+            {
+                new int[] {10, 5, 15, 20 },
+                new int[] {0, 0, 0 },
+                new int[] {int.MaxValue, int.MinValue },
+                new int[] {-100, -2000, 100, 200 },
+                new int[] { }
+            };
+            _ = sort.SortByComparer(new AscendingMaxElementValue(), M);
+            foreach (var val in M)
+            {
+                foreach (int value in val)
+                    Console.WriteLine(value);
+            }
         }
     }
 }

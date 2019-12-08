@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 
-namespace NET.W._2019.Shchahlou._8
+namespace NET.W._2019.Shchahlou._10
 {
     [Serializable]
-    public class Book : IComparable
+    public class Book : IComparable, IFormattable
     {
         private string isbn = "000-0000000000";
 
@@ -139,11 +141,6 @@ namespace NET.W._2019.Shchahlou._8
             }
         }
 
-        public override string ToString()
-        {
-            return author + " " + name + " " + year.ToString();
-        }
-
         public override int GetHashCode()
         {
             return isbn.GetHashCode();
@@ -192,6 +189,89 @@ namespace NET.W._2019.Shchahlou._8
             {
                 throw new ArgumentException("ISBN");
             }
+        }
+
+        /// <summary>
+        /// Calls string ToString(format: "N", provider: CultureInfor.CurrentCulture)
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return this.ToString("N", CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>
+        /// A - author
+        /// N - name
+        /// W - publisher
+        /// I - isbn
+        /// Y - year
+        /// P - number of pages
+        /// C - cost
+        /// </summary>
+        /// <param name="format">Combination of format letters</param>
+        /// <returns>Formatted information about book</returns>
+        public string ToString(string format)
+        {
+            return this.ToString(format, CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>
+        /// A - author
+        /// N - name
+        /// W - publisher
+        /// I - isbn
+        /// Y - year
+        /// P - number of pages
+        /// C - cost
+        /// </summary>
+        /// <param name="format">Combination of format letters</param>
+        /// <param name="provider">CultureInformation</param>
+        /// <returns>Formatted information about book</returns>
+        public string ToString(string format, IFormatProvider provider)
+        {
+            if (String.IsNullOrEmpty(format))
+            {
+                format = "N";
+            }
+
+            if (provider == null)
+            {
+                provider = CultureInfo.CurrentCulture;
+            }
+
+            StringBuilder result = new StringBuilder();
+            foreach (char f in format.ToUpperInvariant())
+            {
+                switch (f.ToString())
+                {
+                    case "A":
+                        result.Append($"{author}");
+                        break;
+                    case "N":
+                        result.Append($"{name}");
+                        break;
+                    case "W":
+                        result.Append($"\"{publisher}\"");
+                        break;
+                    case "I":
+                        result.Append($"ISBN 13: {isbn}");
+                        break;
+                    case "Y":
+                        result.Append($"{year}");
+                        break;
+                    case "P":
+                        result.Append($"P. {numberOfPages}.");
+                        break;
+                    case "C":
+                        result.Append($"{cost}$");
+                        break;
+                    default:
+                        result.Append(f);
+                        break;
+                }
+            }
+            return result.ToString();
         }
 
         int IComparable.CompareTo(object obj)

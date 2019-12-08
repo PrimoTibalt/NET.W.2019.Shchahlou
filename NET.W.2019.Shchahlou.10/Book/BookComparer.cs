@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NET.W._2019.Shchahlou._8
+namespace NET.W._2019.Shchahlou._10
 {
     public class BookYearComparer<T> : IComparer<T>
         where T : Book
