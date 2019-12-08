@@ -1,7 +1,9 @@
 ﻿namespace NET.W._2019.Shchahlou._10
 {
     using System;
+    using System.Globalization;
     using NET.W._2019.Shchahlou._10.SortComparer;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -27,24 +29,30 @@
             Console.WriteLine(richter.ToString("A, N"));
             Console.WriteLine(richter.ToString("A, n, w, y"));
             Console.WriteLine(richter.ToString("I, A, N, W, Y, p, C"));
+            Console.WriteLine("The same on HollyDay!!!");
+            Console.WriteLine(richter.ToString("A, N", CultureInfo.CurrentCulture, true));
+            Console.WriteLine(richter.ToString("A, n, w, y", CultureInfo.CurrentCulture, true));
+            Console.WriteLine(richter.ToString("I, A, N, W, Y, p, C", CultureInfo.CurrentCulture, true));
         }
 
         public static void BubbleTesting()
         {
             BubbleSort sort = new BubbleSort();
-            int[][] M = new int[5][]
+            int[][] m = new int[5][]
             {
-                new int[] {10, 5, 15, 20 },
-                new int[] {0, 0, 0 },
-                new int[] {int.MaxValue, int.MinValue },
-                new int[] {-100, -2000, 100, 200 },
+                new int[] { 10, 5, 15, 20 },
+                new int[] { 0, 0, 0 },
+                new int[] { int.MaxValue, int.MinValue },
+                new int[] { -100, -2000, 100, 200 },
                 new int[] { }
             };
-            _ = sort.SortByComparer(new AscendingMaxElementValue(), M);
-            foreach (var val in M)
+            _ = sort.SortByComparer(new AscendingMaxElementValue(), m);
+            foreach (var val in m)
             {
                 foreach (int value in val)
+                {
                     Console.WriteLine(value);
+                }
             }
         }
     }
