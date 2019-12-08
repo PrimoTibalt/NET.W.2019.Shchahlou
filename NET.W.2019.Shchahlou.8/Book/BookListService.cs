@@ -3,21 +3,29 @@ using System.Collections.Generic;
 
 namespace NET.W._2019.Shchahlou._8
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BookListService
     {
         private List<Book> collection;
+
         private bool sorted = false;
+
         private Dictionary<string, Book> isbnBook = new Dictionary<string, Book>();
+
         private List<Book> booksToRemove;
+
         private List<Book> booksToAdd;
+
         private BookListStorage storage;
 
-        public BookListService(params Book[] books)
+        public BookListService(Book[] books, string filePathForStorage = null)
         {
             collection = new List<Book>(books);
             booksToAdd = new List<Book>(books);
             booksToRemove = new List<Book>();
-            storage = new BookListStorage(null, BookListStorage.FileType.Binary);
+            storage = new BookListStorage(filePathForStorage, BookListStorage.FileType.Binary);
         }
 
         public void AddBook(Book newBook)
@@ -61,7 +69,7 @@ namespace NET.W._2019.Shchahlou._8
                 case "AUTHOR":
                     foreach (Book b in collection)
                     {
-                        if (value == b.Author)
+                        if (b.Author.Contains(value))
                         {
                             result.Add(b);
                         }
@@ -71,7 +79,7 @@ namespace NET.W._2019.Shchahlou._8
                 case "NAME":
                     foreach (Book b in collection)
                     {
-                        if (value == b.Name)
+                        if (b.Name.Contains(value))
                         {
                             result.Add(b);
                         }
@@ -81,7 +89,7 @@ namespace NET.W._2019.Shchahlou._8
                 case "PUBLISHER":
                     foreach (Book b in collection)
                     {
-                        if (value == b.Publisher)
+                        if (b.Publisher.Contains(value))
                         {
                             result.Add(b);
                         }
