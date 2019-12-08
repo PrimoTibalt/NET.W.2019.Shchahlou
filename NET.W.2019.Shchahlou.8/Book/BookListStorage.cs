@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -20,14 +19,14 @@ namespace NET.W._2019.Shchahlou._8
             Json,
         }
 
-        public BookListStorage(string filePath, FileType type)
+        public BookListStorage(string file, FileType type)
         {
-            if (!string.IsNullOrEmpty(filePath))
+            if (!string.IsNullOrEmpty(file))
             {
                 switch (type)
                 {
                     case FileType.Binary:
-                        binaryFilePath = filePath;
+                        binaryFilePath = AppDomain.CurrentDomain.BaseDirectory+file;
                         break;
                     case FileType.Xml:
                         throw new NotImplementedException();
@@ -148,16 +147,18 @@ namespace NET.W._2019.Shchahlou._8
                 {
                     oldBooks = binFormatter.Deserialize(file) as Book[];
                 }
-                
-                SortedSet<Book> clearBooks = new SortedSet<Book>(oldBooks);
-                clearBooks.ExceptWith(delBooks);
+            }
+            ISet<Book> clearBooks = new HashSet<Book>(oldBooks);
+            clearBooks.ExceptWith(delBooks);
 
-                List<Book> clear = new List<Book>();
-                foreach(Book book in clearBooks)
-                {
-                    clear.Add(book);
-                }
+            List<Book> clear = new List<Book>();
+            foreach (Book book in clearBooks)
+            {
+                clear.Add(book);
+            }
 
+            using (FileStream file = new FileStream(binaryFilePath, FileMode.Create))
+            {
                 using (BinaryWriter writter = new BinaryWriter(file))
                 {
                     binFormatter.Serialize(file, clear.ToArray());
