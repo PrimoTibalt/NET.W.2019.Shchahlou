@@ -30,9 +30,11 @@
             Console.WriteLine(richter.ToString("A, n, w, y"));
             Console.WriteLine(richter.ToString("I, A, N, W, Y, p, C"));
             Console.WriteLine("The same on HollyDay!!!");
-            Console.WriteLine(richter.ToString("A, N", CultureInfo.CurrentCulture, true));
-            Console.WriteLine(richter.ToString("A, n, w, y", CultureInfo.CurrentCulture, true));
-            Console.WriteLine(richter.ToString("I, A, N, W, Y, p, C", CultureInfo.CurrentCulture, true));
+            Console.WriteLine(richter.ToString("A, N", CultureInfo.CurrentCulture, new FormatExtension()));
+            Console.WriteLine();
+            Console.WriteLine(richter.ToString("A, n, w, y", CultureInfo.CurrentCulture, new FormatExtension()));
+            Console.WriteLine();
+            Console.WriteLine(richter.ToString("I, A, N, W, Y, p, C", CultureInfo.CurrentCulture, new FormatExtension()));
         }
 
         public static void BubbleTesting()
