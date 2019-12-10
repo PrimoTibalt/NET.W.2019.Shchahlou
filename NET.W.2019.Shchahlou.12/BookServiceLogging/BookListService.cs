@@ -10,7 +10,7 @@ namespace NET.W._2019.Shchahlou._12
     /// </summary>
     public class BookListService
     {
-        private static IBookListLogger logger;
+        private static IBookListLogger logger = new NLogBookListLogger();
 
         private List<Book> collection;
 
@@ -46,7 +46,7 @@ namespace NET.W._2019.Shchahlou._12
 
         public void AddBook(Book newBook)
         {
-            logger.Trace($"Start adding Book {newBook.ToString("I-N-W-A-C-P")}.");
+            logger.Trace($"Start adding Book.");
             if (newBook == null)
             {
                 logger.Error("User try to add Book which is null");
@@ -69,7 +69,7 @@ namespace NET.W._2019.Shchahlou._12
 
         public void RemoveBook(Book removeBook)
         {
-            logger.Trace($"Remove Book {removeBook.ISBNGet()} in collection.");
+            logger.Trace($"Remove Book from collection.");
             if (!this.HaveBookInCol(removeBook))
             {
                 logger.Error($"User doesnt have a Book {removeBook.ISBNGet()} in isbnBook.");
@@ -184,12 +184,17 @@ namespace NET.W._2019.Shchahlou._12
 
         public void UpdateStorage()
         {
+            logger.Debug($"User started to send books in storage.");
             if (sorted)
             {
                 storage.UpdateAllStorage(BookListStorage.FileType.Binary, collection.ToArray());
             }
             else
             {
+                if (booksToAdd.Count == 0 && booksToRemove.Count == 0)
+                {
+                    logger.Warn($"User try to update storage without changes in collection.");
+                }
                 storage.AddToStorage(BookListStorage.FileType.Binary, booksToAdd.ToArray());
                 storage.DeleteFromStorage(BookListStorage.FileType.Binary, booksToRemove.ToArray());
             }

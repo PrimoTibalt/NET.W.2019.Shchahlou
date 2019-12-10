@@ -11,4 +11,8 @@
     <PackageReference Include="NLog.Config" Version="4.6.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Watches\" />
+  </ItemGroup>
+
 </Project>
