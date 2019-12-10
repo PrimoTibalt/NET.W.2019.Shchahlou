@@ -15,7 +15,7 @@ namespace NET.W._2019.Shchahlou._12
         /// <param name="bk">The Book, information about</param>
         /// <param name="format">Letters of the format</param>
         /// <param name="provider">Some Culture Information</param>
-        /// <param name="formatting">Custom class, if null -> uses standart format</param>
+        /// <param name="formatting">Custom class, if null -> uses normal format</param>
         /// <returns></returns>
         public static string ToString(this Book bk, string format, IFormatProvider provider, FormatExtension formatting)
         {
@@ -40,6 +40,10 @@ namespace NET.W._2019.Shchahlou._12
     {
         private Book bk;
 
+        /// <summary>
+        /// Should not run this method!!!
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "Use ToString with 3 parameters";
@@ -57,7 +61,7 @@ namespace NET.W._2019.Shchahlou._12
         /// </summary>
         /// <param name="format">Letters of the format</param>
         /// <param name="provider">Some Culture Information</param>
-        /// <returns>Formated string</returns>
+        /// <returns></returns>
         public string ToString(string format, IFormatProvider provider)
         {
             if (bk == null)
