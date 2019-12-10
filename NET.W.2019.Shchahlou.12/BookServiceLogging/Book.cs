@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace NET.W._2019.Shchahlou._10
+namespace NET.W._2019.Shchahlou._12
 {
     [Serializable]
     public class Book : IComparable, IFormattable
