@@ -218,7 +218,7 @@ namespace NET.W._2019.Shchahlou._12
             if (book == null)
             {
                 logger.Error("User try to check Book which is null.");
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Try to check book, which is null.");
             }
 
             return isbnBook.ContainsKey(book.ISBNGet());
