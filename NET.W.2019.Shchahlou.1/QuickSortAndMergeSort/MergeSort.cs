@@ -10,6 +10,11 @@
         /// <param name="high">Upper bound</param>
         public static void Sort(int[] input, int low, int high)
         {
+            if (input == null)
+            {
+                throw new System.ArgumentNullException("Array is null, nothing to sort!");
+            }
+
             if (low < high)
             {
                 int middle = (low / 2) + (high / 2);

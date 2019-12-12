@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace QuickSortAndMergeSort
+﻿namespace QuickSortAndMergeSort
 {
     /// <summary>
     /// Structure, that sorts input array by QuickSort algorithm
@@ -17,6 +13,11 @@ namespace QuickSortAndMergeSort
         /// <param name="end">end of part to sort</param>
         public static void Sort(int[] arr, int begin, int end)
         {
+            if (arr == null)
+            {
+                throw new System.ArgumentNullException("Array is null. Nothing to sort!");
+            }
+
             int pivot = arr[(begin + ((end - begin) / 2))];
             int left = begin;
             int right = end;
