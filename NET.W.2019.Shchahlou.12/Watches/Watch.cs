@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Threading;
 using System.Timers;
 
 namespace NET.W._2019.Shchahlou._12.Watches
 {
+    /// <summary>
+    /// When we create instance of Watch, it requires to set Boss arriving time.
+    /// After calling StartRelaxation starts countdown before BossTime
+    /// </summary>
     public class Watch
     {
         public delegate void EventHandler<TEventArgs>(object sender, TEventArgs e);
@@ -14,11 +17,11 @@ namespace NET.W._2019.Shchahlou._12.Watches
 
         private BossState bossState;
 
-        protected Watches.EasyWay first;
+        protected EasyWay first;
 
-        protected Watches.Coffee second;
+        protected Coffee second;
 
-        private static System.Timers.Timer aTimer;
+        private static Timer aTimer;
 
         public Watch()
         {
@@ -40,6 +43,20 @@ namespace NET.W._2019.Shchahlou._12.Watches
             }
         }
 
+        /// <summary>
+        /// Subscribe to TimeHasCome (Boss arriving time)
+        /// </summary>
+        /// <param name="handler">observer method</param>
+        public void BecomeAnObserver(EventHandler<BossState> handler)
+        {
+            TimeHasCome += handler;
+        }
+
+        /// <summary>
+        /// Calls event TimeHasCome
+        /// </summary>
+        /// <param name="sender">This object</param>
+        /// <param name="e">Current Boss state</param>
         protected virtual void BossEnters(object sender, BossState e)
         {
             if (e == null)
@@ -56,12 +73,12 @@ namespace NET.W._2019.Shchahlou._12.Watches
                 Console.WriteLine("Oh, no. Boss is sad. It means I'm also sad, lots of work comming...");
             }
 
-            if (TimeHasCome != null)
-            {
-                TimeHasCome(sender, e);
-            }
+            TimeHasCome?.Invoke(sender, e);
         }
 
+        /// <summary>
+        /// Starts countdown before BossTime (when Boss arriving)
+        /// </summary>
         public void StartRelaxation()
         {
             first = new EasyWay();
@@ -70,7 +87,7 @@ namespace NET.W._2019.Shchahlou._12.Watches
             TimeHasCome += first.StopRelaxation;
             TimeHasCome += second.Drink;
 
-            aTimer = new System.Timers.Timer(1000);
+            aTimer = new Timer(1000);
 
             // Hook up the Elapsed event for the timer.
             aTimer.Elapsed += new ElapsedEventHandler(CheckTime);
@@ -79,6 +96,12 @@ namespace NET.W._2019.Shchahlou._12.Watches
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// If current time equivalet to BossTime, then we call BossEnters
+        /// otherwise method sets current boss Mood to reverse of current
+        /// </summary>
+        /// <param name="sender">Current Watch instance</param>
+        /// <param name="e"></param>
         private void CheckTime(object sender, EventArgs e) 
         {
             if ((int)DateTime.Now.TimeOfDay.TotalSeconds == (int)BossTime.TimeOfDay.TotalSeconds)
@@ -90,6 +113,5 @@ namespace NET.W._2019.Shchahlou._12.Watches
                 bossState.GoodMood = !bossState.GoodMood;
             }
         }
-       
     }
 }
