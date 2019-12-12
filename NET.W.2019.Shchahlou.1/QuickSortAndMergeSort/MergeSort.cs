@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace QuickSortAndMergeSort
+﻿namespace QuickSortAndMergeSort
 {
-    public class MergeSort
+    public struct MergeSort
     {
+        /// <summary>
+        /// Sort part(low, high) of input array
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="low">Bottom line</param>
+        /// <param name="high">Upper bound</param>
         public static void Sort(int[] input, int low, int high)
         {
             if (low < high)
@@ -17,31 +19,27 @@ namespace QuickSortAndMergeSort
             }
         }
 
+        /// <summary>
+        /// Sorts entire input array.
+        /// </summary>
+        /// <param name="input"></param>
         public static void Sort(int[] input)
         {
+            if (input == null)
+            {
+                throw new System.ArgumentNullException("Array is null, nothing to sort!");
+            }
+
             Sort(input, 0, input.Length - 1);
         }
 
-        public static string PrintArray(int[] input)
-        {
-            string result = string.Empty;
-
-            for (int i = 0; i < input.Length; i++)
-            {
-                result = result + input[i] + " ";
-            }
-
-            if (input.Length == 0)
-            {
-                result = "Array is empty.";
-                return result;
-            }
-            else
-            {
-                return result;
-            }
-        }
-
+        /// <summary>
+        /// Main algorithm of sorting
+        /// </summary>
+        /// <param name="input">array to sort</param>
+        /// <param name="low">bottom line of array to sort</param>
+        /// <param name="middle"></param>
+        /// <param name="high">upper bound of array to sort</param>
         private static void Merge(int[] input, int low, int middle, int high)
         {
             int left = low;
