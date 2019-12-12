@@ -1,5 +1,8 @@
 ﻿namespace NET.W._2019.Shchahlou._12.Watches
 {
+    /// <summary>
+    /// Class-observer.
+    /// </summary>
     public class EasyWay
     {
         public bool Enterd { get; set; }

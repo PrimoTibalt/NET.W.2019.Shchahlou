@@ -4,6 +4,9 @@ using System.Text;
 
 namespace NET.W._2019.Shchahlou._12.Watches
 {
+    /// <summary>
+    /// Class-observer.
+    /// </summary>
     public class Coffee
     {
         public string Cup;

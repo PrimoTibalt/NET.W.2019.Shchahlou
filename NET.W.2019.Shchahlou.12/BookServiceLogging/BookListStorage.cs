@@ -38,6 +38,11 @@ namespace NET.W._2019.Shchahlou._12
             }
         }
 
+        /// <summary>
+        /// Writes at the end some file (type.Binary, type.Xml, type.Json)
+        /// </summary>
+        /// <param name="type">enum BookListStorage.FileType</param>
+        /// <param name="books">Books to write</param>
         public void AddToStorage(FileType type, params Book[] books)
         {
             switch (type)
@@ -54,6 +59,11 @@ namespace NET.W._2019.Shchahlou._12
             }
         }
 
+        /// <summary>
+        /// Deletes array of Books from some file (type.Binary, type.Xml, type.Json)
+        /// </summary>
+        /// <param name="type">enum BookListStorage.FileType</param>
+        /// <param name="books">books to remove</param>
         public void DeleteFromStorage(FileType type, params Book[] books)
         {
             switch (type)
@@ -70,6 +80,11 @@ namespace NET.W._2019.Shchahlou._12
             }
         }
 
+        /// <summary>
+        /// Updates(delete and add books storage in some file (type.Binary, type.Xml, type.Json)
+        /// </summary>
+        /// <param name="type">enum BookListStorage.FileType</param>
+        /// <param name="books">new Books</param>
         public void UpdateAllStorage(FileType type, Book[] books)
         {
             switch (type)
@@ -86,6 +101,11 @@ namespace NET.W._2019.Shchahlou._12
             }
         }
 
+        /// <summary>
+        /// Reads Books from some file (type.Binary, type.Xml, type.Json).
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>Books from some file</returns>
         public Book[] ReadFromStorage(FileType type)
         {
             var books = type switch
@@ -98,6 +118,10 @@ namespace NET.W._2019.Shchahlou._12
             return books;
         }
 
+        /// <summary>
+        /// Writes at the end of file new Books(serialized).
+        /// </summary>
+        /// <param name="newBooks"></param>
         private void WriteInBinary(Book[] newBooks)
         {
             BinaryFormatter binFormatter = new BinaryFormatter();
@@ -110,7 +134,10 @@ namespace NET.W._2019.Shchahlou._12
             }
         }
 
-
+        /// <summary>
+        /// Reads from binaryFilePaths
+        /// </summary>
+        /// <returns>Books array from binaryFilePath</returns>
         private Book[] ReadFromBinary()
         {
             Book[] books;
@@ -125,6 +152,10 @@ namespace NET.W._2019.Shchahlou._12
             return books;
         }
 
+        /// <summary>
+        /// Deletes old file and creates new with new Books.
+        /// </summary>
+        /// <param name="newBooks"></param>
         private void FullUpdateBinary(Book[] newBooks)
         {
             BinaryFormatter binFormatter = new BinaryFormatter();
@@ -137,6 +168,10 @@ namespace NET.W._2019.Shchahlou._12
             }
         }
 
+        /// <summary>
+        /// Deletes array of Books from binaryFilePath
+        /// </summary>
+        /// <param name="delBooks"></param>
         private void DeleteFromBinary(Book[] delBooks)
         {
             Book[] oldBooks;

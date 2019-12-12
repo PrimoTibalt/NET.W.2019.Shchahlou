@@ -49,6 +49,11 @@ namespace NET.W._2019.Shchahlou._12.Watches
         /// <param name="handler">observer method</param>
         public void BecomeAnObserver(EventHandler<BossState> handler)
         {
+            if(handler == null)
+            {
+                throw new ArgumentNullException("Send null as handler.");
+            }
+
             TimeHasCome += handler;
         }
 
