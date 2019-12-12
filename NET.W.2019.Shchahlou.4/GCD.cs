@@ -8,8 +8,43 @@ namespace NET.W._2019.Shchahlou._4
     /// Do the same but different ways(find GCD by Euclid and BinaryEuclid algorithms)
     /// Also they have way to give time that they spend to find GCD.
     /// </summary>
-    public static class GCD
+    public class GCD
     {
+        private delegate long AlgorithmGCD(int[] numbers);
+
+        public enum Algorithm
+        {
+            Euclid,
+            BinaryEuclid,
+        }
+
+        public long FindGCD(Algorithm version, int[] parameters, bool timeIt = false)
+        {
+            long result;
+            AlgorithmGCD findMethod = version switch
+            {
+                Algorithm.Euclid => EuclidGCD,
+                Algorithm.BinaryEuclid => BinaryEuclidGCD,
+                _ => throw new NotImplementedException(),
+            };
+
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(parameters.ToString());
+            } 
+
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+            result = findMethod(parameters);
+            timer.Stop();
+            if (timeIt)
+            {
+                return timer.ElapsedMilliseconds;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Use Euclid algorithms to find GCD of any count of input numbers.
         /// </summary>
@@ -20,10 +55,8 @@ namespace NET.W._2019.Shchahlou._4
         /// </param>
         /// <returns>GCD</returns>
        #region Classic Euclid
-        public static long EuclidGCD(int[] numbers, bool timeIt = false)
+        public static long EuclidGCD(int[] numbers)
         {
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
             for (int num = 1; num < numbers.Length; num++)
             { 
                 int a = numbers[num];
@@ -59,12 +92,6 @@ namespace NET.W._2019.Shchahlou._4
                 numbers[num] = a;
             }
 
-            timer.Stop();
-            if (timeIt)
-            {
-                return timer.ElapsedMilliseconds;
-            }
-
             return numbers[numbers.Length - 1];
         }
         #endregion
@@ -79,10 +106,8 @@ namespace NET.W._2019.Shchahlou._4
         /// </param>
         /// <returns>GCD</returns>
         #region
-        public static long BinaryEuclidGCD(int[] numbers, bool timeIt = false)
+        public static long BinaryEuclidGCD(int[] numbers)
         {
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
             for (int num = 1; num < numbers.Length; num++)
             {
                 int a = numbers[num];
@@ -141,12 +166,6 @@ namespace NET.W._2019.Shchahlou._4
 
                 /* restore common factors of 2 */
                 numbers[num] = a << shift;
-            }
-
-            timer.Stop();
-            if (timeIt)
-            {
-                return timer.ElapsedMilliseconds;
             }
 
             return numbers[numbers.Length - 1];
