@@ -13,9 +13,13 @@ namespace BLL.Interface.Interfaces
     public interface IAccountService
     {
         void OpenAccount(string name, AccountType type, IAccountNumberCreateService creator);
+
         List<IAccount> GetAllAccounts();
+
         void DepositAccount(long acc, decimal money);
+
         void WithdrawAccount(long acc, decimal money);
+
         void CloseAccount(long acc);
     }
 }

@@ -9,18 +9,18 @@ namespace ConsolePL
 {
     public class Program
     {
-        private static readonly IKernel resolver;
+        private static readonly IKernel Resolver;
 
         static Program()
         {
-            resolver = new StandardKernel();
-            resolver.ConfigurateResolver();
+            Resolver = new StandardKernel();
+            Resolver.ConfigurateResolver();
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            IAccountService service = resolver.Get<IAccountService>();
-            IAccountNumberCreateService creator = resolver.Get<IAccountNumberCreateService>();
+            IAccountService service = Resolver.Get<IAccountService>();
+            IAccountNumberCreateService creator = Resolver.Get<IAccountNumberCreateService>();
 
             service.OpenAccount("Account owner 1", AccountType.Base, creator);
             service.OpenAccount("Account owner 2", AccountType.Base, creator);

@@ -12,7 +12,7 @@ namespace DAI.Repositories
         /// <param name="name"></param>
         public AccountBinaryRepository(string name)
         {
-            //Mabe there will be something
+            // Mabe there will be something
         }
 
         public List<T> GetAccountsList()

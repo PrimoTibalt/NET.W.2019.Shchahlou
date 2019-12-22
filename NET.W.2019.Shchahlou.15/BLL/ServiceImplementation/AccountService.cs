@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using BLL.Interface.Interfaces;
 using BLL.Interface.Entities;
+using BLL.Interface.Interfaces;
 using DAI.Interface.Interfaces;
 
 namespace BLL.ServiceImplementation
 {
     public class AccountService : IAccountService
     {
-        protected int AccountsCount = 0;
+        protected int accountsCount = 0;
 
         protected IRepository<IAccount> repos;
 
+        /// <summary>
+        /// Set repos equal to repository
+        /// </summary>
+        /// <param name="repository"></param>
         public AccountService(IRepository<IAccount> repository)
         {
             if (repository != null)
@@ -34,6 +38,7 @@ namespace BLL.ServiceImplementation
             if (acc.Money > 0)
             {
                 repos.DeleteAccount(acc);
+                accountsCount--;
             }
             else
             {
@@ -67,7 +72,7 @@ namespace BLL.ServiceImplementation
                 case AccountType.Silver: 
                     acc = new SilverAccount(name, creator.GetNextNumber(name));
                     break;
-                case AccountType.Gold: //Isn't implemented
+                case AccountType.Gold: // Isn't implemented.
                     acc = new SilverAccount(name, creator.GetNextNumber(name));
                     break;
                 default:
@@ -76,10 +81,11 @@ namespace BLL.ServiceImplementation
             }
 
             repos.AddToAccountList(acc);
+            accountsCount++;
         }
 
         /// <summary>
-        /// Withdrow money from account with so number 
+        /// Withdraw money from account with so number 
         /// </summary>
         /// <param name="number"></param>
         /// <param name="money"></param>
@@ -91,7 +97,7 @@ namespace BLL.ServiceImplementation
         }
 
         /// <summary>
-        /// Deposite money to account with so number 
+        /// Deposit money to account with so number 
         /// </summary>
         /// <param name="number"></param>
         /// <param name="money"></param>
@@ -101,7 +107,6 @@ namespace BLL.ServiceImplementation
             acc.DepositeMoneyToBalls(money);
             acc.Money += money;
         }
-
 
         /// <summary>
         /// Search account by number in repository
