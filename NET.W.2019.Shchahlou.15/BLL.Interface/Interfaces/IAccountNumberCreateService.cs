@@ -2,5 +2,6 @@
 {
     public interface IAccountNumberCreateService
     {
+        int GetNextNumber(string name);
     }
 }

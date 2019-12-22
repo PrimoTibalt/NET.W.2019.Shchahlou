@@ -7,7 +7,7 @@ using Ninject;
 
 namespace ConsolePL
 {
-    class Program
+    public class Program
     {
         private static readonly IKernel resolver;
 
@@ -48,6 +48,8 @@ namespace ConsolePL
             {
                 Console.WriteLine(item);
             }
+
+            Console.ReadKey();
         }
     }
 }
