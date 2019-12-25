@@ -13,7 +13,13 @@ namespace NET.W._2019.Shchahlou._13.Queue
 
         private bool IsDisposed = false;
 
-        public T Current { get; set; }
+        public T Current
+        {
+            get
+            {
+                return elements[position];
+            }
+        }
 
         public QueueEnumerator(T[] elements)
         {
@@ -44,7 +50,11 @@ namespace NET.W._2019.Shchahlou._13.Queue
 
         public void Dispose()
         {
-            if (IsDisposed) return;
+            if (IsDisposed)
+            {
+                return;
+            }
+
             IsDisposed = true;
         }
 
