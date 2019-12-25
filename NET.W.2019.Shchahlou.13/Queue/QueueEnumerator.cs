@@ -5,6 +5,10 @@ using System.Text;
 
 namespace NET.W._2019.Shchahlou._13.Queue
 {
+    /// <summary>
+    /// Handmade enumerator for queue.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class QueueEnumerator<T> : IEnumerator<T>
     {
         private int position = -1;
@@ -13,6 +17,9 @@ namespace NET.W._2019.Shchahlou._13.Queue
 
         private bool IsDisposed = false;
 
+        /// <summary>
+        /// Current element.
+        /// </summary>
         public T Current
         {
             get
@@ -21,6 +28,10 @@ namespace NET.W._2019.Shchahlou._13.Queue
             }
         }
 
+        /// <summary>
+        /// Elements for foreach.
+        /// </summary>
+        /// <param name="elements"></param>
         public QueueEnumerator(T[] elements)
         {
             if (elements == null)
@@ -48,6 +59,9 @@ namespace NET.W._2019.Shchahlou._13.Queue
             }
         }
 
+        /// <summary>
+        /// GC method.
+        /// </summary>
         public void Dispose()
         {
             if (IsDisposed)
@@ -58,6 +72,10 @@ namespace NET.W._2019.Shchahlou._13.Queue
             IsDisposed = true;
         }
 
+        /// <summary>
+        /// Tryies to move to the next element of queue.
+        /// </summary>
+        /// <returns></returns>
         public bool MoveNext()
         {
             if (position < elements.Length - 1)
@@ -71,6 +89,9 @@ namespace NET.W._2019.Shchahlou._13.Queue
             }
         }
 
+        /// <summary>
+        /// Sets pointer to -1.
+        /// </summary>
         public void Reset()
         {
             position = -1;
