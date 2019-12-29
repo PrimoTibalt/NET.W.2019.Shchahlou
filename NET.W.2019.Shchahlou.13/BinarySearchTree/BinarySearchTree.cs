@@ -38,6 +38,7 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
         public BinarySearchTree()
         {
             this.root = null;
+            this.comparer = new Comparers.DefaultComparer<T>();
         }
 
         /// <summary>
