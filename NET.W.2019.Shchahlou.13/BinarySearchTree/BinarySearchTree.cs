@@ -160,7 +160,7 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
         /// Implementation of inorder Tree traversal.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<Node<T>> Inorder()
+        private IEnumerable<Node<T>> Preorder()
         {
             if (this.Root == null)
             {
@@ -198,7 +198,7 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
         /// Implementation of preorder Tree traversal.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<Node<T>> Preorder()
+        private IEnumerable<Node<T>> Inorder()
         {
             throw new NotImplementedException();
         }
