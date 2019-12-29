@@ -160,7 +160,7 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
         /// Implementation of inorder Tree traversal.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<Node<T>> Preorder()
+        public IEnumerable<Node<T>> Preorder()
         {
             if (this.Root == null)
             {
@@ -169,17 +169,15 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
 
             List<Node<T>> added = new List<Node<T>>();
 
-            
             Node<T> current = this.Root;
-            for (int i = 0; i < this.count; i++)
+            while (added.Count != this.count && current != null)
             {
                 if (!added.Contains(current))
                 {
                     yield return current;
                     added.Add(current);
                 }
-
-                if (current.Left != null && !added.Contains(current.Left))
+                else if (current.Left != null && !added.Contains(current.Left))
                 {
                     current = current.Left;
                 }
@@ -198,18 +196,84 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
         /// Implementation of preorder Tree traversal.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<Node<T>> Inorder()
+        public IEnumerable<Node<T>> Inorder()
         {
-            throw new NotImplementedException();
+            if (this.Root == null)
+            {
+                throw new SystemException("Tree is empty");
+            }
+
+            List<Node<T>> addedSecond = new List<Node<T>>();
+            List<Node<T>> addedOnce = new List<Node<T>>();
+
+
+            Node<T> current = this.Root;
+            while (addedSecond.Count != this.Count && current != null)
+            { 
+                if (addedOnce.Contains(current) && !addedSecond.Contains(current))
+                {
+                    yield return current;
+                    addedSecond.Add(current);
+                }
+                else if (!addedOnce.Contains(current))
+                {
+                    addedOnce.Add(current);
+                }
+                
+                if (current.Left != null && !addedSecond.Contains(current.Left))
+                {
+                    current = current.Left;
+                } 
+                else if (current.Right != null && !addedSecond.Contains(current.Right))
+                {
+                    current = current.Right;
+                }
+                else
+                {
+                    current = current.Root;
+                }
+            }
         }
 
         /// <summary>
         /// Implementation of postorder Tree traversal.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<Node<T>> Postorder()
+        public IEnumerable<Node<T>> Postorder()
         {
-            throw new NotImplementedException();
+            if (this.Root == null)
+            {
+                throw new SystemException("Tree is empty");
+            }
+
+            List<Node<T>> addedSecond = new List<Node<T>>();
+            List<Node<T>> addedOnce = new List<Node<T>>();
+
+            Node<T> current = this.Root;
+            while (addedSecond.Count != this.Count && current != null)
+            {
+                if (current.Left == null && current.Right == null)
+                {
+                    yield return current;
+                    addedSecond.Add(current);
+                    current = current.Root;
+                }
+
+                if (current.Left != null && !addedSecond.Contains(current.Left))
+                {
+                    current = current.Left;
+                }
+                else if (current.Right != null && !addedSecond.Contains(current.Right))
+                {
+                    current = current.Right;
+                }
+                else
+                {
+                    yield return current;
+                    addedSecond.Add(current);
+                    current = current.Root;
+                }
+            }
         }
     }
 }
