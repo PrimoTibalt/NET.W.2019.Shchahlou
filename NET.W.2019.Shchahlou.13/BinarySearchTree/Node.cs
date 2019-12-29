@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NET.W._2019.Shchahlou._13.BinarySearchTree
 {
@@ -65,6 +64,7 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
             {
                 return this.right;
             }
+
             set
             {
                 if (value == null)
@@ -78,11 +78,29 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
             }
         }
 
+        /// <summary>
+        /// If value is null - node is main.
+        /// </summary>
+        public Node<T> Root
+        {
+            get
+            {
+                return root;
+            }
+
+            set
+            {
+                this.root = value;
+            }
+        }
+
         private T value;
 
         private Node<T> left;
 
         private Node<T> right;
+
+        private Node<T> root;
 
         /// <summary>
         /// Sets the value for Node.
@@ -90,14 +108,17 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
         /// <param name="val"></param>
         public Node(T val)
         {
-            if (val == null)
-            {
-                throw new ArgumentNullException("Throw null as value for node.");
-            }
-            else
-            {
-                this.Value = val;
-            }
+            this.Value = val;
+        }
+
+        /// <summary>
+        /// Sets Root and value for node.
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="myRoot"></param>
+        public Node(T val, Node<T> myRoot) : this(val)
+        {
+            this.root = myRoot;
         }
     }
 }
