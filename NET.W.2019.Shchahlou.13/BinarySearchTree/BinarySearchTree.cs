@@ -22,6 +22,22 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
         private Node<T> root;
 
         /// <summary>
+        /// Count of nodes.
+        /// </summary>
+        private int count = 0;
+
+        /// <summary>
+        /// Readonly property to return count of nodes in the tree.
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                return count;
+            }
+        }
+
+        /// <summary>
         /// Root of the tree.
         /// </summary>
         public Node<T> Root
@@ -100,9 +116,11 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
                 throw new ArgumentNullException("Passed null as argument in constructor.");
             }
 
+            this.count++;
             if (node == null)
             {
                 this.root = new Node<T>(element);
+                this.root.Root = null;
             }
             else
             {
@@ -111,7 +129,7 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
                     case 1:
                         if (node.Right == null)
                         {
-                            node.Right = new Node<T>(element);
+                            node.Right = new Node<T>(element, node);
                         }
                         else
                         {
@@ -124,7 +142,7 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
                     case -1:
                         if (node.Left == null)
                         {
-                            node.Left = new Node<T>(element);
+                            node.Left = new Node<T>(element, node);
                         }
                         else
                         {
@@ -144,7 +162,36 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
         /// <returns></returns>
         private IEnumerable<Node<T>> Inorder()
         {
-            throw new NotImplementedException();
+            if (this.Root == null)
+            {
+                throw new SystemException("Tree is empty");
+            }
+
+            List<Node<T>> added = new List<Node<T>>();
+
+            
+            Node<T> current = this.Root;
+            for (int i = 0; i < this.count; i++)
+            {
+                if (!added.Contains(current))
+                {
+                    yield return current;
+                    added.Add(current);
+                }
+
+                if (current.Left != null && !added.Contains(current.Left))
+                {
+                    current = current.Left;
+                }
+                else if (current.Right != null && !added.Contains(current.Right))
+                {
+                    current = current.Right;
+                }
+                else
+                {
+                    current = current.Root;
+                }
+            }
         }
 
         /// <summary>
