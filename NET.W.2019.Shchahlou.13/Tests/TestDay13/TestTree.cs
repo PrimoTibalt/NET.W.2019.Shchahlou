@@ -9,11 +9,11 @@ namespace TestDay13
     [TestFixture]
     public class TestTree
     {
-        [TestCase(new int[] { 5, 4, 3, 2, 6, 10, 8}, ExpectedResult = new int[] { 2, 3, 4, 5, 8, 10, 6 })]
+        [TestCase(new int[] { 5, 4, 3, 2, 6, 10, 8 }, ExpectedResult = new int[] { 2, 3, 4, 5, 8, 10, 6 })]
         public int[] TestPointers(int[] points)
         {
             List<Point> list = new List<Point>();
-            foreach(var point in points)
+            foreach (var point in points)
             {
                 list.Add(new Point(point));
             }
@@ -30,6 +30,33 @@ namespace TestDay13
             for (int i = 0; i < list.Count; i++)
             {
                 array[i] = list[i].Number;
+            }
+
+            return array;
+        }
+
+        [TestCase(new int[] { 5, 4, 3, 2, 6, 10, 8 }, ExpectedResult = new int[] { 5, 4, 3, 2, 6, 10, 8 })]
+        public int[] TestBooks(int[] points)
+        {
+
+            List<Book> list = new List<Book>();
+            foreach (var point in points)
+            {
+                list.Add(new Book(point));
+            }
+
+            BinarySearchTree<Book> tree = new BinarySearchTree<Book>(list.ToArray());
+            int[] array = new int[list.Count];
+
+            list.Clear();
+            foreach (var node in tree.Preorder())
+            {
+                list.Add(node.Value);
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                array[i] = list[i].Year;
             }
 
             return array;
