@@ -230,7 +230,15 @@ namespace NET.W._2019.Shchahlou._13.BinarySearchTree
                 }
                 else
                 {
-                    current = current.Root;
+                    if (!addedSecond.Contains(current))
+                    {
+                        yield return current;
+                        addedSecond.Add(current);
+                    }
+                    else
+                    {
+                        current = current.Root;
+                    }
                 }
             }
         }
