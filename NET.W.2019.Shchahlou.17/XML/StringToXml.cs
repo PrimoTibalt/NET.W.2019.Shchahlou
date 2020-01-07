@@ -6,6 +6,9 @@
     using System.Xml.Linq;
     using NET.W._2019.Shchahlou._17.XML.Interfaces;
 
+    /// <summary>
+    /// Class-converter for URL to represent them in XML.
+    /// </summary>
     public class StringToXml : IStringToXML
     {
         /// <summary>
@@ -22,8 +25,9 @@
             // Main tag.
             XElement urlAddresses = new XElement("urlAddresses");
             string[] everyUrl = data.Split();
-            foreach (string url in everyUrl)
+            for (int i = 0; i < everyUrl.Length - 1; i++)
             {
+                string url = everyUrl[i];
                 if (string.IsNullOrWhiteSpace(url))
                 {
                     continue;
@@ -45,25 +49,23 @@
 
                 XElement uri = new XElement("uri");
                 // Add segments of uri.
-                for (int i = 1; i < elements.Length; i++)
+                for (int j = 1; j < elements.Length; j++)
                 {
-                    if (elements[i].Contains("?"))
+                    if (elements[j].Contains("?"))
                     {
-                        uri.Add(new XElement("segment", elements[i].Split("?")[0]));
+                        uri.Add(new XElement("segment", elements[j].Split("?")[0]));
                         break;
                     }
 
-                    if (string.IsNullOrWhiteSpace(elements[i]))
+                    if (string.IsNullOrWhiteSpace(elements[j]))
                     {
                         continue;
                     }
 
-                    uri.Add(new XElement("segment", elements[i]));
+                    uri.Add(new XElement("segment", elements[j]));
                 }
 
                 urlAddress.Add(uri);
-                
-
                 if (!url.Contains("?"))
                 {
                     urlAddresses.Add(urlAddress);

@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Xml;
+    using System.Xml.Schema;
     using System.Xml.Linq;
 
     /// <summary>
@@ -12,6 +13,14 @@
     {
         private string schemaName = @"C:\Users\PrimoTibalt\Desktop\Studying\NET.W.2019.Shchahlou\NET.W.2019.Shchahlou.17\defaultSchema.xsd";
 
+        /// <summary>
+        /// Validate document by saving him and then loading by XmlReader.Load.
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns>
+        /// If document is valid - returns true.
+        /// if doucument is unvalid - returns false.
+        /// </returns>
         public bool Validation(XDocument document)
         {
             using (StreamWriter stream = new StreamWriter("def.xml"))
@@ -29,7 +38,7 @@
                     XDocument doc = XDocument.Load(reader);
                 }
             }
-            catch (XmlException ex)
+            catch (XmlSchemaException)
             {
                 return false;
             }
