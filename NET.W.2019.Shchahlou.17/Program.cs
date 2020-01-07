@@ -20,7 +20,6 @@
             Validator val = new Validator();
             StringToXml converter = new StringToXml();
             XMLWriter writer = new XMLWriter(val, converter, "default.xml");
-            Console.WriteLine(bldr.ToString());
             writer.Write(bldr.ToString());
 
         }
