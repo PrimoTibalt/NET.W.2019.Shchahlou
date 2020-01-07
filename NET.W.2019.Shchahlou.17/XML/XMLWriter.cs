@@ -110,7 +110,7 @@
                 Validator.Validation(doc);
             }
 
-
+            Write(doc);
         }
 
         /// <summary>
