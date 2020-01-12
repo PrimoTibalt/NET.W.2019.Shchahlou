@@ -81,11 +81,17 @@
                 (service.FindBookByTag("Author", "Joe Albahari")[0].ISBNGet() == thirdDel.ISBNGet()));
             Console.WriteLine("Let's sort our storage!");
             Console.WriteLine("Let's delete book from service!");
-            service.RemoveBook(null);
+            service.RemoveBook(thirdDel);
             Console.WriteLine("Let's sort books by everything!");
             service.SortBooksByTag(new BookYearComparer<Book.Book>());
-
+            Console.WriteLine("By Year:");
+            service.ShowLocal();
             service.SortBooksByTag(new BookCostComparer<Book.Book>());
+            Console.WriteLine("By cost:");
+            service.ShowLocal();
+            Console.WriteLine("In storage:");
+            service.ShowStorage();
+            Console.WriteLine("End of demonstration book service!\n");
 
             Watches.Watch watch = new Watches.Watch();
             watch.StartRelaxation();
