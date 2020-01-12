@@ -1,10 +1,10 @@
-﻿namespace NET.W._2019.Shchahlou._8.Book.Storages
+﻿namespace NET.W._2019.Shchahlou._10.Book.Storages
 {
     using System;
     using System.IO;
     using System.Collections.Generic;
     using System.Runtime.Serialization.Formatters.Binary;
-    using NET.W._2019.Shchahlou._8.Book.Interfaces;
+    using NET.W._2019.Shchahlou._10.Book.Interfaces;
 
     /// <summary>
     /// Storage in binary format.

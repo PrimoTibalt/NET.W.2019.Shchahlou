@@ -2,7 +2,9 @@
 {
     using System;
     using System.Globalization;
+    using NET.W._2019.Shchahlou._10.Book;
     using NET.W._2019.Shchahlou._10.SortComparer;
+    using NET.W._2019.Shchahlou._10.Book.Extensions;
 
     public class Program
     {
@@ -16,7 +18,7 @@
 
         public static void BookTesting()
         {
-            Book richter = new Book()
+            Book.Book richter = new Book.Book()
             {
                 Author = "Jeffrey Richter",
                 Name = "CLR via C#",
@@ -30,7 +32,6 @@
             Console.WriteLine(richter.ToString("A, n, w, y"));
             Console.WriteLine(richter.ToString("I, A, N, W, Y, p, C"));
             Console.WriteLine("The same on HollyDay!!!");
-            Console.WriteLine(richter.ToString("A, N", CultureInfo.CurrentCulture, new FormatExtension()));
             Console.WriteLine();
             Console.WriteLine(richter.ToString("A, n, w, y", CultureInfo.CurrentCulture, new FormatExtension()));
             Console.WriteLine();

@@ -1,9 +1,9 @@
-﻿namespace NET.W._2019.Shchahlou._8.Book
+﻿namespace NET.W._2019.Shchahlou._10.Book
 {
     using System;
     using System.Collections.Generic;
-    using NET.W._2019.Shchahlou._8.Book.Storages;
-    using NET.W._2019.Shchahlou._8.Book.Interfaces;
+    using NET.W._2019.Shchahlou._10.Book.Storages;
+    using NET.W._2019.Shchahlou._10.Book.Interfaces;
 
     /// <summary>
     /// Service for Books.

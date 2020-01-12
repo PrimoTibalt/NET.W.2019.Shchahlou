@@ -1,7 +1,7 @@
-﻿namespace NET.W._2019.Shchahlou._8.Book
+﻿namespace NET.W._2019.Shchahlou._10.Book
 {
     using System;
-    using NET.W._2019.Shchahlou._8.Book.Interfaces;
+    using NET.W._2019.Shchahlou._10.Book.Interfaces;
 
     public class BookListStorage
     {

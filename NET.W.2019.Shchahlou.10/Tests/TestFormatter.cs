@@ -1,9 +1,11 @@
-using NUnit.Framework;
-using System;
-using NET.W._2019.Shchahlou._10;
-
-namespace TestBooks
+﻿namespace NET.W._2019.Shchahlou._10.Tests
 {
+    using NUnit.Framework;
+    using System;
+    using NET.W._2019.Shchahlou._10.Book;
+    using NET.W._2019.Shchahlou._10.Book.Extensions;
+
+
     [TestFixture]
     public class TestsFormatting
     {
@@ -27,13 +29,7 @@ namespace TestBooks
         private FormatExtension extension;
 
         [TestCase("A", null, ExpectedResult = "|||Author|||")]
-        [TestCase("A," +
-                  "N." +
-                  "W." +
-                  "I." +
-                  "Y." +
-                  "P," +
-                  "C", null, ExpectedResult = "|||Author|||\n|||Name|||\n|||Publisher|||\n|||000-0000000000|||\n|||2012|||\n|||826|||\n|||100$|||")]
+        [TestCase("A," + "N." + "W." + "I." + "Y." + "P," + "C", null, ExpectedResult = "|||Author|||\n|||Name|||\n|||Publisher|||\n|||000-0000000000|||\n|||2012|||\n|||826|||\n|||100$|||")]
         [TestCase("", null, ExpectedResult = "|||Name|||")]
         public string Test_FormatExtension(string format, IFormatProvider formatProvider)
         {

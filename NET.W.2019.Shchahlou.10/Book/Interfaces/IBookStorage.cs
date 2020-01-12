@@ -1,4 +1,4 @@
-﻿namespace NET.W._2019.Shchahlou._8.Book.Interfaces
+﻿namespace NET.W._2019.Shchahlou._10.Book.Interfaces
 {
     public interface IBookStorage
     {
