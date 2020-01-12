@@ -1,19 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._8
+﻿namespace NET.W._2019.Shchahlou._8.Bank
 {
-    public enum Status
-    {
-        Base,
-        Gold,
-        Platinum,
-    }
+    using System;
+    using NET.W._2019.Shchahlou._8.Bank.Interfaces;
 
+    /// <summary>
+    /// Represents Account for users of the bank.
+    /// </summary>
     [Serializable]
-    public class BankAccount
+    public class BankAccount : IBankAccount
     {
+        private long id;
+
+        private string firstName;
+
+        private string lastName;
+
+        private decimal cash;
+
+        private Status statusAccount;
+
+        private int bonusBalls;
+
+        private bool freazed;
+
+        /// <summary>
+        /// Information about account.
+        /// </summary>
+        /// <param name="id">unique</param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="startCash"></param>
+        /// <param name="stat"></param>
         public BankAccount(long id, string firstName, string lastName, decimal startCash, Status stat)
         {
             this.Id = id;
@@ -24,19 +41,131 @@ namespace NET.W._2019.Shchahlou._8
 
             this.Cash = startCash;
 
-            this.Status = stat;
+            this.StatusAccount = stat;
+
+            this.Freazed = false;
+
+            this.BonusBalls = 0;
         }
 
-        public long Id { get; }
+        public long Id
+        {
+            get
+            {
+                return id;
+            }
 
-        public string FirstName { get; set; }
+            private set
+            {
+                this.id = value;
+            }
+        }
 
-        public string LastName { get; set; }
+        public string FirstName
+        {
+            get
+            {
+                return this.firstName;
+            }
 
-        public decimal Cash { get; set; }
+            set
+            {
+                if (!this.Freazed)
+                {
+                    this.firstName = value;
+                }
+                else
+                {
+                    this.AccountFreazed();
+                }
+            }
+        }
 
-        public Status Status { get; set; }
+        public string LastName
+        {
+            get
+            {
+                return this.lastName;
+            }
 
-        public int BonusBalls { get; set; }
+            set
+            {
+                if (!this.Freazed)
+                {
+                    this.lastName = value;
+                }
+                else
+                {
+                    this.AccountFreazed();
+                }
+            }
+        }
+
+        public decimal Cash
+        {
+            get
+            {
+                return this.cash;
+            }
+
+            set
+            {
+                if (!this.Freazed)
+                {
+                    this.cash = value;
+                }
+                else
+                {
+                    this.AccountFreazed();
+                }
+            }
+        }
+
+        public Status StatusAccount
+        {
+            get
+            {
+                return this.statusAccount;
+            }
+
+            set
+            {
+                if (!this.Freazed)
+                {
+                    this.statusAccount = value;
+                }
+                else
+                {
+                    this.AccountFreazed();
+                }
+            }
+        }
+
+        public int BonusBalls
+        {
+            get
+            {
+                return this.bonusBalls;
+            }
+
+            set
+            {
+                if (!this.Freazed)
+                {
+                    this.bonusBalls = value;
+                }
+                else
+                {
+                    this.AccountFreazed();
+                }
+            }
+        }
+
+        public bool Freazed { get; set; }
+
+        private void AccountFreazed()
+        {
+            Console.WriteLine("Account freazed, you cant change anything!");
+        }
     }
 }

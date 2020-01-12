@@ -2,6 +2,8 @@
 {
     public interface IBankAccount
     {
+        public bool Freazed { get; set; }
+
         public long Id { get; }
 
         public string FirstName { get; set; }

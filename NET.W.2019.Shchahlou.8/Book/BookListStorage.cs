@@ -1,169 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-
-namespace NET.W._2019.Shchahlou._8
+﻿namespace NET.W._2019.Shchahlou._8.Book
 {
+    using System;
+    using NET.W._2019.Shchahlou._8.Book.Interfaces;
+
     public class BookListStorage
     {
-       
-        public string binaryFilePath = AppDomain.CurrentDomain.BaseDirectory + @"BookListStorage.bin";
-        public string xmlFilePath = AppDomain.CurrentDomain.BaseDirectory + @"BookListStorage.xml";
-        public string jsonFilePath = AppDomain.CurrentDomain.BaseDirectory + @"BookListStorage.json";
+        private IBookStorage CurrentStorage { get; }
 
-        public enum FileType
+        public BookListStorage(IBookStorage storage, string file) : this(storage)
         {
-            Binary,
-            Xml,
-            Json,
-        }
-
-        public BookListStorage(string file, FileType type)
-        {
-            if (!string.IsNullOrEmpty(file))
+            if (!string.IsNullOrWhiteSpace(file))
             {
-                switch (type)
-                {
-                    case FileType.Binary:
-                        binaryFilePath = AppDomain.CurrentDomain.BaseDirectory+file;
-                        break;
-                    case FileType.Xml:
-                        throw new NotImplementedException();
-                    case FileType.Json:
-                        throw new NotImplementedException();
-                    default:
-                        throw new NotImplementedException();
-                }
+                storage.FilePath = file;
             }
         }
 
-        public void AddToStorage(FileType type, params Book[] books)
+        public BookListStorage(IBookStorage storage)
         {
-            switch (type)
+            if (storage == null)
             {
-                case FileType.Binary:
-                    WriteInBinary(books);
-                    break;
-                case FileType.Xml:
-                    throw new NotImplementedException();
-                case FileType.Json:
-                    throw new NotImplementedException();
-                default:
-                    throw new NotImplementedException();
+                throw new ArgumentNullException("storage", "Try to set null as storage.");
             }
+
+            this.CurrentStorage = storage;
         }
 
-        public void DeleteFromStorage(FileType type, params Book[] books)
+        public void AddToStorage(params Book[] books)
         {
-            switch (type)
+            if (books == null)
             {
-                case FileType.Binary:
-                    DeleteFromBinary(books);
-                    break;
-                case FileType.Xml:
-                    throw new NotImplementedException();
-                case FileType.Json:
-                    throw new NotImplementedException();
-                default:
-                    throw new NotImplementedException();
+                Console.WriteLine("STRANGE: TRY TO ADD NULL TO STORAGE.");
             }
+
+            this.CurrentStorage.Write(books);
         }
 
-        public void UpdateAllStorage(FileType type, Book[] books)
+        public void DeleteFromStorage(params Book[] books)
         {
-            switch (type)
+            if (books == null)
             {
-                case FileType.Binary:
-                    FullUpdateBinary(books);
-                    break;
-                case FileType.Xml:
-                    throw new NotImplementedException();
-                case FileType.Json:
-                    throw new NotImplementedException();
-                default:
-                    throw new NotImplementedException();
+                Console.WriteLine("STRANGE: TRY TO DELETE NULL FROM STORAGE.");
             }
+
+            this.CurrentStorage.Delete(books);
         }
 
-        public Book[] ReadFromStorage(FileType type)
+        public void UpdateAllStorage(Book[] books)
         {
-            var books = type switch
+            if (books == null)
             {
-                FileType.Binary => ReadFromBinary(),
-                FileType.Xml => throw new NotImplementedException(),
-                FileType.Json => throw new NotImplementedException(),
-                _ => throw new NotImplementedException(),
-            };
+                Console.WriteLine("STRANGE: TRY TO ADD NULL OF BOOKS WHILE UPDATION TO STORAGE.");
+            }
+
+            this.CurrentStorage.FullUpdate(books);
+        }
+
+        public Book[] ReadFromStorage()
+        {
+            Book[] books = this.CurrentStorage.ReadFromStorage();
+            if (books == null)
+            {
+                Console.WriteLine("STRANGE: READ NULL FROM STORAGE.");
+            }
+
             return books;
-        }
-
-        private void WriteInBinary(Book[] newBooks)
-        {
-            BinaryFormatter binFormatter = new BinaryFormatter();
-            using (FileStream file = new FileStream(binaryFilePath, FileMode.OpenOrCreate))
-            {
-                using (BinaryWriter writter = new BinaryWriter(file))
-                {
-                    binFormatter.Serialize(file, newBooks);
-                }
-            }
-        }
-
-
-        private Book[] ReadFromBinary()
-        {
-            Book[] books;
-            BinaryFormatter binFormatter = new BinaryFormatter();
-            using (FileStream file = new FileStream(binaryFilePath, FileMode.Open))
-            {
-                using (BinaryReader writter = new BinaryReader(file))
-                {
-                    books = binFormatter.Deserialize(file) as Book[];
-                }
-            }
-            return books;
-        }
-
-        private void FullUpdateBinary(Book[] newBooks)
-        {
-            BinaryFormatter binFormatter = new BinaryFormatter();
-            using (FileStream file = new FileStream(binaryFilePath, FileMode.Create))
-            {
-                using (BinaryWriter writter = new BinaryWriter(file))
-                {
-                    binFormatter.Serialize(file, newBooks);
-                }
-            }
-        }
-
-        private void DeleteFromBinary(Book[] delBooks)
-        {
-            Book[] oldBooks;
-            BinaryFormatter binFormatter = new BinaryFormatter();
-            using (FileStream file = new FileStream(binaryFilePath, FileMode.Open))
-            {
-                using (BinaryReader writter = new BinaryReader(file))
-                {
-                    oldBooks = binFormatter.Deserialize(file) as Book[];
-                }
-            }
-            ISet<Book> clearBooks = new HashSet<Book>(oldBooks);
-            clearBooks.ExceptWith(delBooks);
-
-            List<Book> clear = new List<Book>();
-            foreach (Book book in clearBooks)
-            {
-                clear.Add(book);
-            }
-
-            using (FileStream file = new FileStream(binaryFilePath, FileMode.Create))
-            {
-                using (BinaryWriter writter = new BinaryWriter(file))
-                {
-                    binFormatter.Serialize(file, clear.ToArray());
-                }
-            }
         }
     }
 }

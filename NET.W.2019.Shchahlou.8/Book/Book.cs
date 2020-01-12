@@ -1,7 +1,10 @@
-﻿using System;
-
-namespace NET.W._2019.Shchahlou._8
+﻿namespace NET.W._2019.Shchahlou._8.Book
 {
+    using System;
+
+    /// <summary>
+    /// Serializable class of book.
+    /// </summary>
     [Serializable]
     public class Book : IComparable
     {
@@ -19,6 +22,9 @@ namespace NET.W._2019.Shchahlou._8
 
         private decimal cost;
 
+        /// <summary>
+        /// Name of the book.
+        /// </summary>
         public string Name
         {
             get
@@ -39,6 +45,9 @@ namespace NET.W._2019.Shchahlou._8
             }
         }
 
+        /// <summary>
+        /// If input value is null or white space than sets 'Author(s) is(are) unknown.'.
+        /// </summary>
         public string Author 
         {
             get
@@ -59,6 +68,9 @@ namespace NET.W._2019.Shchahlou._8
             }
         }
 
+        /// <summary>
+        /// Not from future, not less 0.
+        /// </summary>
         public short Year 
         {
             get
@@ -79,6 +91,9 @@ namespace NET.W._2019.Shchahlou._8
             }
         }
 
+        /// <summary>
+        /// If input value is null or white space than sets 'Without publisher".
+        /// </summary>
         public string Publisher 
         {
             get
@@ -99,6 +114,9 @@ namespace NET.W._2019.Shchahlou._8
             }
         }
 
+        /// <summary>
+        /// Not less than 0.
+        /// </summary>
         public int NumberOfPages
         {
             get
@@ -119,6 +137,9 @@ namespace NET.W._2019.Shchahlou._8
             }
         }
 
+        /// <summary>
+        /// Not less than 0.
+        /// </summary>
         public decimal Cost
         {
             get
@@ -128,27 +149,40 @@ namespace NET.W._2019.Shchahlou._8
 
             set
             {
-                if (value < 0)
+                if (value > 0)
                 {
-                    throw new ArgumentException("Cost cant be less than 0.");
+                    cost = value;
                 }
                 else
                 {
-                    cost = value;
+                    throw new ArgumentException("Cost cant be less than 0.");
                 }
             }
         }
 
+        /// <summary>
+        /// Author Name Year .
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return author + " " + name + " " + year.ToString();
         }
 
+        /// <summary>
+        /// Hash of ISBN in string.
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return isbn.GetHashCode();
         }
 
+        /// <summary>
+        /// Compares hashcodes of Books.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             return obj.GetHashCode() == this.GetHashCode();
@@ -159,6 +193,10 @@ namespace NET.W._2019.Shchahlou._8
             return isbn;
         }
 
+        /// <summary>
+        /// Checks on correct ISBN13.
+        /// </summary>
+        /// <param name="value">ISBN</param>
         public void ISBNSet(string value)
         {
             int sum = 0;

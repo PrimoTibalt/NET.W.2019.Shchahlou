@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NET.W._2019.Shchahlou._8
+﻿namespace NET.W._2019.Shchahlou._8.Book
 {
+    using System;
+    using System.Collections.Generic;
+    using NET.W._2019.Shchahlou._8.Book.Storages;
+    using NET.W._2019.Shchahlou._8.Book.Interfaces;
+
     /// <summary>
-    /// 
+    /// Service for Books.
     /// </summary>
     public class BookListService
     {
@@ -20,12 +22,17 @@ namespace NET.W._2019.Shchahlou._8
 
         private BookListStorage storage;
 
-        public BookListService(Book[] books, string filePathForStorage = null)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="books"></param>
+        /// <param name="filePathForStorage"></param>
+        public BookListService(Book[] books, IBookStorage storage, string filePathForStorage = null)
         {
-            collection = new List<Book>();
-            booksToAdd = new List<Book>();
-            booksToRemove = new List<Book>();
-            storage = new BookListStorage(filePathForStorage, BookListStorage.FileType.Binary);
+            this.collection = new List<Book>();
+            this.booksToAdd = new List<Book>();
+            this.booksToRemove = new List<Book>();
+            this.storage = new BookListStorage(storage, filePathForStorage);
             foreach (Book b in books)
             {
                 this.AddBook(b);
@@ -62,6 +69,13 @@ namespace NET.W._2019.Shchahlou._8
             return collection.ToArray();
         }
 
+        /// <summary>
+        /// Variants of parameter:
+        /// ISBN, AUTHOR, NAME, PUBLISHER, YEAR, NUMBEROFPAGES, COST.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public Book[] FindBookByTag(string parameter, string value)
         {
             List<Book> result = new List<Book>();
@@ -141,12 +155,12 @@ namespace NET.W._2019.Shchahlou._8
         {
             if (sorted)
             {
-                storage.UpdateAllStorage(BookListStorage.FileType.Binary, collection.ToArray());
+                storage.UpdateAllStorage(collection.ToArray());
             }
             else
             {
-                storage.AddToStorage(BookListStorage.FileType.Binary, booksToAdd.ToArray());
-                storage.DeleteFromStorage(BookListStorage.FileType.Binary, booksToRemove.ToArray());
+                storage.AddToStorage(booksToAdd.ToArray());
+                storage.DeleteFromStorage(booksToRemove.ToArray());
             }
         }
 

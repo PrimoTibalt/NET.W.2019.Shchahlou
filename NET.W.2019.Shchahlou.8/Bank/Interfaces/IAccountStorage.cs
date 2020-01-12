@@ -9,6 +9,6 @@
         /// Save one account.
         /// </summary>
         /// <param name="ba"></param>
-        public void Store(BankAccount ba);
+        public void Store(IBankAccount ba);
     }
 }
