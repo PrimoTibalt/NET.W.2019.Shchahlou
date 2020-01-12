@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._13.Queue
+﻿namespace NET.W._2019.Shchahlou._13.Queue
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Handmade enumerator for queue.
     /// </summary>

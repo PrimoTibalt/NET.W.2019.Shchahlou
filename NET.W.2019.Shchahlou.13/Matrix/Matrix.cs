@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NET.W._2019.Shchahlou._13
+﻿namespace NET.W._2019.Shchahlou._13
 {
+    using System;
+
     /// <summary>
     /// square matrix
     /// </summary>

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._13.BinarySearchTree.Comparers
+﻿namespace NET.W._2019.Shchahlou._13.BinarySearchTree.Comparers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// Have only compare method, that compares by standart comparer of the type(if exists) if comparer doesnt exist, than compares HashCode(like int).
     /// </summary>

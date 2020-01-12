@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NET.W._2019.Shchahlou._13.BinarySearchTree
+﻿namespace NET.W._2019.Shchahlou._13.BinarySearchTree
 {
+    using System;
+
     /// <summary>
     /// Type to represent node of the BinarySearchTree
     /// </summary>

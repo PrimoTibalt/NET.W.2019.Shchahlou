@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._13.BinarySearchTree
+﻿namespace NET.W._2019.Shchahlou._13.BinarySearchTree
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Implementation of BinaryTree data structure
     /// Can go through tree 3 ways:

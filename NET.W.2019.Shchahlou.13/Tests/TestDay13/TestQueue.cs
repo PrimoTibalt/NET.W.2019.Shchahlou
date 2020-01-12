@@ -1,9 +1,8 @@
-using NUnit.Framework;
-using System;
-using NET.W._2019.Shchahlou._13;
-
 namespace TestDay13
 {
+    using NUnit.Framework;
+    using NET.W._2019.Shchahlou._13;
+
     [TestFixture]
     public class TestsQueue
     {

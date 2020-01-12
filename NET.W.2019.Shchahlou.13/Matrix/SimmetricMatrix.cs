@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._13.Matrix
+﻿namespace NET.W._2019.Shchahlou._13.Matrix
 {
+    using System;
+
     public class SimmetricMatrix<T> : Matrix<T> where T : struct
     {
         /// <summary>

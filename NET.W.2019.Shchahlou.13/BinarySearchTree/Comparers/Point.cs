@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._13.BinarySearchTree.Comparers
+﻿namespace NET.W._2019.Shchahlou._13.BinarySearchTree.Comparers
 {
+    using System;
+
     public struct Point : IComparable
     {
         public int Number { get; set; }

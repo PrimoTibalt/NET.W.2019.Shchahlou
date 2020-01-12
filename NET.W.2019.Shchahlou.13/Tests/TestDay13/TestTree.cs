@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using NET.W._2019.Shchahlou._13.BinarySearchTree;
-using NET.W._2019.Shchahlou._13.BinarySearchTree.Comparers;
-using NUnit.Framework;
-
-namespace TestDay13
+﻿namespace TestDay13
 {
+    using System.Collections.Generic;
+    using NET.W._2019.Shchahlou._13.BinarySearchTree;
+    using NET.W._2019.Shchahlou._13.BinarySearchTree.Comparers;
+    using NUnit.Framework;
+
     [TestFixture]
     public class TestTree
     {

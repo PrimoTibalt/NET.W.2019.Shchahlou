@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._13
+﻿namespace NET.W._2019.Shchahlou._13
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Implementation of data structure QUEUE, with FIFO
     /// </summary>
