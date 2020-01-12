@@ -117,14 +117,18 @@ namespace NET.W._2019.Shchahlou._4
                 /* GCD(0,b) == b; GCD(a,0) == a, GCD(0,0) == 0 */
                 if (a == 0)
                 {
-                    return b;
+                    return a;
                 }
 
                 if (b == 0)
                 {
-                    return a;
+                    return b;
                 }
 
+                if (a < 0 || b < 0)
+                {
+                    throw new ArgumentException("Negative number in input array!");
+                }
                 /* Let shift = lg K, where K is the greatest power of 2
                    dividing both a and b. */
                 while (((a | b) & 1) == 0)
