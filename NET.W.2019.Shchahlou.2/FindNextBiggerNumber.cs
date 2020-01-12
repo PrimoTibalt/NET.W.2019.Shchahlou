@@ -55,8 +55,8 @@ namespace NET.W._2019.Shchahlou._2
         /// </summary>
         /// <param name="number"></param>
         /// <param name="time">
-        /// True - method returns time, spent on FindNextBiggerNumber
-        /// False - returns FindNextBiggerNumber result
+        /// True - method returns time, spent on FindNextBiggerNumber.
+        /// False - returns FindNextBiggerNumber result.
         /// </param>
         /// <returns>Count of milliseconds spent on FindNextBiggerNumber. Or the number.</returns>
         public static long FindNextBiggerNumber(int number, bool time)
@@ -96,7 +96,7 @@ namespace NET.W._2019.Shchahlou._2
         }
 
         /// <summary>
-        /// Method to help FindNextBiggerNumber
+        /// Method to help FindNextBiggerNumber.
         /// </summary>
         /// <param name="number"></param>
         /// <returns>numeric, which contains as many nine's as many symbols in parameter number</returns>

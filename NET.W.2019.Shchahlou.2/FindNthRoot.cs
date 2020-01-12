@@ -15,6 +15,11 @@ namespace NET.W._2019.Shchahlou._2
         /// <returns></returns>
         public static double FindNthRoot(float number, int root, float precision)
         {
+            if (number == 0)
+            {
+                return 0;
+            }
+
             float x0 = number / root;
             float x1 = (1 / (float)root) * (((root - 1) * x0) + (number / Pow(x0, (int)root - 1)));
             while (Math.Abs(x1 - x0) > precision)

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET.W.2019.Shchahlou.2", "NET.W.2019.Shchahlou.2.csproj", "{9EB6393C-51A3-40AB-A630-D969C8BC4E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NET.W.2019.Shchahlou.2", "NET.W.2019.Shchahlou.2.csproj", "{9EB6393C-51A3-40AB-A630-D969C8BC4E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests.csproj", "{5C13BF08-C407-41B3-9F2B-653F7CBAD2F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "..\Tests\Tests.csproj", "{5C13BF08-C407-41B3-9F2B-653F7CBAD2F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

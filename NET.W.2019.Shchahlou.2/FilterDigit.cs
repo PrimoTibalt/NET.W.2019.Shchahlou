@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._2
+﻿namespace NET.W._2019.Shchahlou._2
 {
+    using System;
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Have one method for array of integers - method filters them.
+    /// </summary>
     public static class FilterDigitCls
     {
         /// <summary>
@@ -16,6 +18,11 @@ namespace NET.W._2019.Shchahlou._2
         /// <returns></returns>
         public static int[] FilterDigit(int mainNum, params int[] arr)
         {
+            if (arr == null)
+            {
+                 throw new ArgumentNullException("arr", "Give null as array of integers to FilterDigit method.");
+            }
+
             List<int> final = new List<int>();
             if (mainNum < 0)
             {
