@@ -17,12 +17,7 @@
 
         public BookListStorage(IBookStorage storage)
         {
-            if (storage == null)
-            {
-                throw new ArgumentNullException("storage", "Try to set null as storage.");
-            }
-
-            this.CurrentStorage = storage;
+            this.CurrentStorage = storage ?? throw new ArgumentNullException("storage", "Try to set null as storage.");
         }
 
         /// <summary>
