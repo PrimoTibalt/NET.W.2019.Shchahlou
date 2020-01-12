@@ -1,4 +1,4 @@
-﻿namespace NET.W._2019.Shchahlou._12
+﻿namespace NET.W._2019.Shchahlou._12.Book
 {
     using NLog;
     using NLog.Fluent;

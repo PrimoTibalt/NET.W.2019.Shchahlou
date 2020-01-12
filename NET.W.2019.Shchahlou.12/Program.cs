@@ -1,14 +1,17 @@
-﻿using System;
-
-namespace NET.W._2019.Shchahlou._12
+﻿namespace NET.W._2019.Shchahlou._12
 {
+    using System;
+    using NET.W._2019.Shchahlou._12.Book;
+    using NET.W._2019.Shchahlou._12.Book.Storages;
+    using NET.W._2019.Shchahlou._12.Book.Interfaces;
+
     public class Program
     {
         public static void Main(string[] args)
         {
             Console.WriteLine("*****Test Book's Service*****");
             Console.WriteLine("1 - Create books!");
-            Book first = new Book()
+            Book.Book first = new Book.Book()
             {
                 Author = "Rob Miles",
                 Name = "C# Programming Yellow Book",
@@ -18,7 +21,7 @@ namespace NET.W._2019.Shchahlou._12
                 Year = 2016,
             };
             Console.WriteLine("Create 1!");
-            Book second = new Book()
+            Book.Book second = new Book.Book()
             {
                 Author = "Andrew Stellman, Jennifer Greene",
                 Name = "Head First C#",
@@ -29,7 +32,7 @@ namespace NET.W._2019.Shchahlou._12
             };
             second.ISBNSet("9780596514822");
             Console.WriteLine("Create 2!");
-            Book thirdDel = new Book()
+            Book.Book thirdDel = new Book.Book()
             {
                 Author = "Joe Albahari",
                 Name = "C# 7.0 in a Nutshell",
@@ -41,7 +44,7 @@ namespace NET.W._2019.Shchahlou._12
             thirdDel.ISBNSet("9785990944619");
 
             Console.WriteLine("Create 3!");
-            Book fourthAdd = new Book()
+            Book.Book fourthAdd = new Book.Book()
             {
                 Author = "Jon Skeet",
                 Name = "C# in Depth",
@@ -53,7 +56,7 @@ namespace NET.W._2019.Shchahlou._12
             fourthAdd.ISBNSet("978 - 1617294532");
 
             Console.WriteLine("Create 4!");
-            Book fifth = new Book()
+            Book.Book fifth = new Book.Book()
             {
                 Author = "Jeffrey Richter",
                 Name = "CLR via C#",
@@ -66,8 +69,8 @@ namespace NET.W._2019.Shchahlou._12
 
             Console.WriteLine("Create 5!");
             Console.WriteLine("End of creation!\nLets create BookListService!");
-            Book[] massiv = new Book[] { first, second, thirdDel, fifth };
-            BookListService service = new BookListService(massiv);
+            Book.Book[] massiv = new Book.Book[] { first, second, thirdDel, fifth };
+            BookListService service = new BookListService(massiv, new BinaryStorage());
             Console.WriteLine("Let's throw books in the local storage");
             service.UpdateStorage();
             Console.WriteLine("Let's add book in service!");
@@ -80,9 +83,9 @@ namespace NET.W._2019.Shchahlou._12
             Console.WriteLine("Let's delete book from service!");
             service.RemoveBook(null);
             Console.WriteLine("Let's sort books by everything!");
-            service.SortBooksByTag(new BookYearComparer<Book>());
+            service.SortBooksByTag(new BookYearComparer<Book.Book>());
 
-            service.SortBooksByTag(new BookCostComparer<Book>());
+            service.SortBooksByTag(new BookCostComparer<Book.Book>());
 
             Watches.Watch watch = new Watches.Watch();
             watch.StartRelaxation();

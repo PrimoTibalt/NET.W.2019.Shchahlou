@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NET.W._2019.Shchahlou._12
+﻿namespace NET.W._2019.Shchahlou._12.Book
 {
+    using System;
+    using System.Collections.Generic;
+    using NET.W._2019.Shchahlou._12.Book.Storages;
+    using NET.W._2019.Shchahlou._12.Book.Interfaces;
+
     /// <summary>
-    /// Class to use your Book's right
-    /// Contains methods to save on computer 
-    /// your Books, sort them, add new and delete old
+    /// Service for Books.
     /// </summary>
     public class BookListService
     {
@@ -24,7 +24,12 @@ namespace NET.W._2019.Shchahlou._12
 
         private BookListStorage storage;
 
-        public BookListService(Book[] books, string filePathForStorage = null)
+        /// <summary>
+        /// Implement BookListService.
+        /// </summary>
+        /// <param name="books"></param>
+        /// <param name="filePathForStorage"></param>
+        public BookListService(Book[] books, IBookStorage storage, string filePathForStorage = null)
         {
             logger.Trace("User initialized BookListService object");
             if (filePathForStorage == null)
@@ -32,12 +37,10 @@ namespace NET.W._2019.Shchahlou._12
                 logger.Warn("User didnt set filePathForStorage");
             }
 
-            collection = new List<Book>();
-            booksToAdd = new List<Book>();
-            booksToRemove = new List<Book>();
-
-            logger.Debug("Initialize storage.");
-            storage = new BookListStorage(filePathForStorage, BookListStorage.FileType.Binary);
+            this.collection = new List<Book>();
+            this.booksToAdd = new List<Book>();
+            this.booksToRemove = new List<Book>();
+            this.storage = new BookListStorage(storage, filePathForStorage) ?? throw new ArgumentNullException("storage", "Try to set storage as null.");
             foreach (Book b in books)
             {
                 this.AddBook(b);
@@ -55,18 +58,20 @@ namespace NET.W._2019.Shchahlou._12
 
             if (this.HaveBookInCol(newBook))
             {
-                logger.Error($"User has a Book {newBook.ISBNGet()} in isbnBook.");
+                logger.Error($"User doesnt have a Book {newBook.ISBNGet()} in isbnBook.");
                 throw new ArgumentException("Have this book in the collection.");
             }
 
-            logger.Trace($"Add Book {newBook.ISBNGet()} in booksToAdd.");
-            booksToAdd.Add(newBook);
-            logger.Trace($"Add Book {newBook.ISBNGet()} in collection.");
-            collection.Add(newBook);
-            logger.Trace($"Add Book {newBook.ISBNGet()} in isbnBook.");
-            isbnBook[newBook.ISBNGet()] = newBook;
+            logger.Trace($"Add Book {newBook.ISBNGet()} in isbnBook, collection, booksToAdd.");
+            this.booksToAdd.Add(newBook);
+            this.collection.Add(newBook);
+            this.isbnBook[newBook.ISBNGet()] = newBook;
         }
 
+        /// <summary>
+        /// Removes from local and adds in booksToRemove.
+        /// </summary>
+        /// <param name="removeBook"></param>
         public void RemoveBook(Book removeBook)
         {
             logger.Trace($"Remove Book from collection.");
@@ -76,46 +81,58 @@ namespace NET.W._2019.Shchahlou._12
                 throw new ArgumentException("Dont have this book in the collection.");
             }
 
-            logger.Trace($"Remove Book {removeBook.ISBNGet()} from collections and dictionaries.");
-            RemoveFromCollections(removeBook);
-            logger.Trace($"Add Book {removeBook.ISBNGet()} in booksToRemove.");
-            booksToRemove.Add(removeBook);
+            this.RemoveFromCollections(removeBook);
+            this.booksToRemove.Add(removeBook);
         }
 
+        /// <summary>
+        /// Sorts collection, set sorted equal to true.
+        /// </summary>
+        /// <param name="comparer"></param>
+        /// <returns>sorted collection</returns>
         public Book[] SortBooksByTag(IComparer<Book> comparer)
         {
             logger.Trace("User sorts collection by some somparer.");
             if (comparer == null)
             {
-                logger.Warn("User send null as comparer.");
+                logger.Error("User send null as comparer.");
+                throw new ArgumentNullException("comparer", "Try to send null as comparer");
             }
-
-            if (collection.Count == 0)
+            
+            if (this.collection.Count == 0)
             {
                 logger.Warn("User tries to sort empty collection.");
             }
 
-            collection.Sort(comparer);
-            sorted = true;
+            this.collection.Sort(comparer);
+            this.sorted = true;
             return collection.ToArray();
         }
 
+        /// <summary>
+        /// Variants of parameter:
+        /// ISBN, AUTHOR, NAME, PUBLISHER, YEAR, NUMBEROFPAGES, COST.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public Book[] FindBookByTag(string parameter, string value)
         {
             logger.Trace($"Try to find Book with {parameter}: {value}.");
             if (value == null)
             {
-                logger.Warn($"User use null as value to Find");
+                logger.Error($"User use null as value to Find");
+                throw new ArgumentNullException("value", "Try to find book by null as value to find");
             }
 
             List<Book> result = new List<Book>();
             switch (parameter.ToUpperInvariant())
             {
                 case "ISBN":
-                    result.Add(isbnBook[value]);
+                    result.Add(this.isbnBook[value]);
                     break;
                 case "AUTHOR":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (b.Author.Contains(value))
                         {
@@ -125,7 +142,7 @@ namespace NET.W._2019.Shchahlou._12
 
                     break;
                 case "NAME":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (b.Name.Contains(value))
                         {
@@ -135,7 +152,7 @@ namespace NET.W._2019.Shchahlou._12
 
                     break;
                 case "PUBLISHER":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (b.Publisher.Contains(value))
                         {
@@ -145,7 +162,7 @@ namespace NET.W._2019.Shchahlou._12
 
                     break;
                 case "YEAR":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (int.Parse(value) == b.Year)
                         {
@@ -155,7 +172,7 @@ namespace NET.W._2019.Shchahlou._12
 
                     break;
                 case "NUMBEROFPAGES":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (int.Parse(value) == b.NumberOfPages)
                         {
@@ -165,7 +182,7 @@ namespace NET.W._2019.Shchahlou._12
 
                     break;
                 case "COST":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (decimal.Parse(value) == b.Cost)
                         {
@@ -175,19 +192,22 @@ namespace NET.W._2019.Shchahlou._12
 
                     break;
                 default:
-                    logger.Warn($"User used strange parameter: {parameter}.");
                     throw new ArgumentException();
             }
 
             return result.ToArray();
         }
 
+        /// <summary>
+        /// If storage is sorted, than updates all the storage.
+        /// if storage isnt sorted, than addes and after that deletes books.
+        /// </summary>
         public void UpdateStorage()
         {
             logger.Debug($"User started to send books in storage.");
-            if (sorted)
+            if (this.sorted)
             {
-                storage.UpdateAllStorage(BookListStorage.FileType.Binary, collection.ToArray());
+                this.storage.UpdateAllStorage(collection.ToArray());
             }
             else
             {
@@ -195,24 +215,42 @@ namespace NET.W._2019.Shchahlou._12
                 {
                     logger.Warn($"User try to update storage without changes in collection.");
                 }
-                storage.AddToStorage(BookListStorage.FileType.Binary, booksToAdd.ToArray());
-                storage.DeleteFromStorage(BookListStorage.FileType.Binary, booksToRemove.ToArray());
-            }
 
-            booksToAdd.Clear();
-            booksToRemove.Clear();
+                this.storage.AddToStorage(booksToAdd.ToArray());
+                this.storage.DeleteFromStorage(booksToRemove.ToArray());
+                this.booksToAdd.Clear();
+                booksToRemove.Clear();
+            }
         }
 
+        /// <summary>
+        /// Show books from class collection.
+        /// </summary>
         public void ShowLocal()
         {
-            throw new NotImplementedException();
+            foreach (var book in this.collection)
+            {
+                Console.WriteLine(book.ToString());
+            }
         }
 
+        /// <summary>
+        /// Show books from storage collection.
+        /// </summary>
         public void ShowStorage()
         {
-            throw new NotImplementedException();
+            Book[] booksFromStorage = this.storage.ReadFromStorage();
+            foreach (var book in booksFromStorage)
+            {
+                Console.WriteLine(book.ToString());
+            }
         }
 
+        /// <summary>
+        /// Checks does we have input book in local collection.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
         private bool HaveBookInCol(Book book)
         {
             if (book == null)
@@ -221,9 +259,14 @@ namespace NET.W._2019.Shchahlou._12
                 throw new ArgumentNullException("Try to check book, which is null.");
             }
 
-            return isbnBook.ContainsKey(book.ISBNGet());
+            return this.isbnBook.ContainsKey(book.ISBNGet());
         }
 
+        /// <summary>
+        /// Used by RemoveBook.
+        /// Removes from local collection, from booksToAdd and from isbnBook.
+        /// </summary>
+        /// <param name="book"></param>
         private void RemoveFromCollections(Book book)
         {
             if (book == null)
@@ -231,19 +274,17 @@ namespace NET.W._2019.Shchahlou._12
                 logger.Error("User try to delete Book which is null.");
                 throw new ArgumentNullException();
             }
-
+            
             try
             {
-                logger.Trace($"Remove Book {book.ISBNGet()} from collection.");
+                logger.Trace($"Remove Book {book.ISBNGet()} from collection, booksToAdd, isbnBook.");
                 collection.Remove(book);
-                logger.Trace($"Remove Book {book.ISBNGet()} from booksToAdd.");
                 booksToAdd.Remove(book);
-                logger.Trace($"Remove Book {book.ISBNGet()} from isbnBook.");
                 isbnBook.Remove(book.ISBNGet());
             }
             catch (Exception e)
             {
-                logger.Error($"Error while removing Book {book.ISBNGet()}.\nError message: \n{e.ToString()}.");
+               logger.Error($"Error while removing Book {book.ISBNGet()}.\nError message: \n{e.ToString()}.");
             }
         }
     }
