@@ -166,12 +166,19 @@
 
         public void ShowLocal()
         {
-            throw new NotImplementedException();
+            foreach (var book in this.collection)
+            {
+                Console.WriteLine(book.ToString());
+            }
         }
 
         public void ShowStorage()
         {
-            throw new NotImplementedException();
+            Book[] booksFromStorage = this.storage.ReadFromStorage();
+            foreach (var book in booksFromStorage)
+            {
+                Console.WriteLine(book.ToString());
+            }
         }
 
         private bool HaveBookInCol(Book book)
