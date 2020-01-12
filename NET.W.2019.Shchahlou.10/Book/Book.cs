@@ -1,11 +1,12 @@
-﻿using System;
-using System.Globalization;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._10
+﻿namespace NET.W._2019.Shchahlou._8.Book
 {
+    using System;
+
+    /// <summary>
+    /// Serializable class of book.
+    /// </summary>
     [Serializable]
-    public class Book : IComparable, IFormattable
+    public class Book : IComparable
     {
         private string isbn = "000-0000000000";
 
@@ -21,6 +22,9 @@ namespace NET.W._2019.Shchahlou._10
 
         private decimal cost;
 
+        /// <summary>
+        /// Name of the book.
+        /// </summary>
         public string Name
         {
             get
@@ -41,6 +45,9 @@ namespace NET.W._2019.Shchahlou._10
             }
         }
 
+        /// <summary>
+        /// If input value is null or white space than sets 'Author(s) is(are) unknown.'.
+        /// </summary>
         public string Author 
         {
             get
@@ -61,6 +68,9 @@ namespace NET.W._2019.Shchahlou._10
             }
         }
 
+        /// <summary>
+        /// Not from future, not less 0.
+        /// </summary>
         public short Year 
         {
             get
@@ -81,6 +91,9 @@ namespace NET.W._2019.Shchahlou._10
             }
         }
 
+        /// <summary>
+        /// If input value is null or white space than sets 'Without publisher".
+        /// </summary>
         public string Publisher 
         {
             get
@@ -101,6 +114,9 @@ namespace NET.W._2019.Shchahlou._10
             }
         }
 
+        /// <summary>
+        /// Not less than 0.
+        /// </summary>
         public int NumberOfPages
         {
             get
@@ -121,6 +137,9 @@ namespace NET.W._2019.Shchahlou._10
             }
         }
 
+        /// <summary>
+        /// Not less than 0.
+        /// </summary>
         public decimal Cost
         {
             get
@@ -130,19 +149,28 @@ namespace NET.W._2019.Shchahlou._10
 
             set
             {
-                if (value < 0)
+                if (value > 0)
                 {
-                    throw new ArgumentException("Cost cant be less than 0.");
+                    cost = value;
                 }
                 else
                 {
-                    cost = value;
+                    throw new ArgumentException("Cost cant be less than 0.");
                 }
             }
         }
 
         /// <summary>
-        /// ISBN is unique for every book, makes hash from string of ISBN 
+        /// Author Name Year .
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return author + " " + name + " " + year.ToString();
+        }
+
+        /// <summary>
+        /// Hash of ISBN in string.
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -151,7 +179,7 @@ namespace NET.W._2019.Shchahlou._10
         }
 
         /// <summary>
-        /// Checks hash codes of Books
+        /// Compares hashcodes of Books.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -160,17 +188,13 @@ namespace NET.W._2019.Shchahlou._10
             return obj.GetHashCode() == this.GetHashCode();
         }
 
-        /// <summary>
-        /// Getter method for ISBN
-        /// </summary>
-        /// <returns>ISBN as it was gave</returns>
         public string ISBNGet()
         {
             return isbn;
         }
 
         /// <summary>
-        /// Checks does value is correct of ISBN 13
+        /// Checks on correct ISBN13.
         /// </summary>
         /// <param name="value">ISBN</param>
         public void ISBNSet(string value)
@@ -178,7 +202,7 @@ namespace NET.W._2019.Shchahlou._10
             int sum = 0;
             bool even = false;
             char ch;
-            for (int i = 0; i < value.Length - 1; i++)
+            for (int i = 0; i < value.Length-1; i++)
             {
                 ch = value[i];
                 if (!char.IsDigit(ch) && ch != '-' && ch != ' ')
@@ -192,7 +216,7 @@ namespace NET.W._2019.Shchahlou._10
                         continue;
                     }
 
-                    sum += int.Parse(ch.ToString()) * ((!even) ? 1 : 3);
+                    sum += int.Parse(ch.ToString()) * ((!even)? 1 : 3);
                     even = !even;
                 }
             }
@@ -208,96 +232,6 @@ namespace NET.W._2019.Shchahlou._10
             }
         }
 
-        /// <summary>
-        /// Calls string ToString(format: "N", provider: CultureInfo.CurrentCulture)
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return this.ToString("N", CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>
-        /// A - author
-        /// N - name
-        /// W - publisher
-        /// I - ISBN
-        /// Y - year
-        /// P - number of pages
-        /// C - cost
-        /// </summary>
-        /// <param name="format">Combination of format letters</param>
-        /// <returns>Formatted information about book</returns>
-        public string ToString(string format)
-        {
-            return this.ToString(format, CultureInfo.CurrentCulture);
-        }
-
-        /// <summary>
-        /// A - author
-        /// N - name
-        /// W - publisher
-        /// I - ISBN
-        /// Y - year
-        /// P - number of pages
-        /// C - cost
-        /// </summary>
-        /// <param name="format">Combination of format letters</param>
-        /// <param name="provider">CultureInformation</param>
-        /// <returns>Formatted information about book</returns>
-        public string ToString(string format, IFormatProvider provider)
-        {
-            if (string.IsNullOrEmpty(format))
-            {
-                format = "N";
-            }
-
-            if (provider == null)
-            {
-                provider = CultureInfo.CurrentCulture;
-            }
-
-            StringBuilder result = new StringBuilder();
-            foreach (char f in format.ToUpperInvariant())
-            {
-                switch (f.ToString())
-                {
-                    case "A":
-                        result.Append($"{author}");
-                        break;
-                    case "N":
-                        result.Append($"{name}");
-                        break;
-                    case "W":
-                        result.Append($"\"{publisher}\"");
-                        break;
-                    case "I":
-                        result.Append($"ISBN 13: {isbn}");
-                        break;
-                    case "Y":
-                        result.Append($"{year}");
-                        break;
-                    case "P":
-                        result.Append($"P. {numberOfPages}.");
-                        break;
-                    case "C":
-                        result.Append($"{cost}$");
-                        break;
-                    default:
-                        result.Append(f);
-                        break;
-                }
-            }
-
-            return result.ToString();
-        }
-
-        /// <summary>
-        /// Base comparator compares year of the books
-        /// bigger year -> bigger Book in orderliness
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
         int IComparable.CompareTo(object obj)
         {
             Book secondBook = obj as Book;

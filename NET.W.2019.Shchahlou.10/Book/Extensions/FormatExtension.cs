@@ -1,34 +1,8 @@
-﻿using System;
-using System.Globalization;
-using System.Text;
-
-namespace NET.W._2019.Shchahlou._10
+﻿namespace NET.W._2019.Shchahlou._10.Book.Extensions
 {
-    /// <summary>
-    /// Extension class for users formatting.
-    /// </summary>
-    public static class BookExtension
-    {
-        /// <summary>
-        /// Custom formatting of description of the Book.
-        /// </summary>
-        /// <param name="bk">The Book, information about</param>
-        /// <param name="format">Letters of the format</param>
-        /// <param name="provider">Some Culture Information</param>
-        /// <param name="formatting">Custom class, if null -> uses standart format</param>
-        /// <returns></returns>
-        public static string ToString(this Book bk, string format, IFormatProvider provider, FormatExtension formatting)
-        {
-            if (formatting != null)
-            {
-                return formatting.ToString(bk, format, provider);
-            }
-            else
-            {
-                return bk.ToString(format);
-            }
-        }
-    }
+    using System;
+    using System.Globalization;
+    using System.Text;
 
     /// <summary>
     /// If you want to specify formatting of the Book
