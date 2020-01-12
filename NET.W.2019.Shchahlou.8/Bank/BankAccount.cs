@@ -21,8 +21,6 @@
 
         private int bonusBalls;
 
-        private bool freazed;
-
         /// <summary>
         /// Information about account.
         /// </summary>
