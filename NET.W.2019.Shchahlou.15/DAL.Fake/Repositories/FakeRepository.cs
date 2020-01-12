@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DAI.Fake
+﻿namespace DAI.Fake
 {
+    using System;
+    using System.Collections.Generic;
+
     public static class FakeRepository<T>
     {
         private static List<T> repository = new List<T>();

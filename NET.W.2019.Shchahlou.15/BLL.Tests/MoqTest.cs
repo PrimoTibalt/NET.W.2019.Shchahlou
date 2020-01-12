@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
-using Moq;
-using DAI.Interface.Interfaces;
-using BLL.Interface.Entities;
-using BLL.Interface.Interfaces;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
+    using System.Collections.Generic;
+    using NUnit.Framework;
+    using Moq;
+    using DAI.Interface.Interfaces;
+    using BLL.Interface.Entities;
+    using BLL.Interface.Interfaces;
+
     public class MoqTest
     {
         public static Mock<IRepository<IAccount>> mock;

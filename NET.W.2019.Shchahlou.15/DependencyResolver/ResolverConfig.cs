@@ -1,13 +1,13 @@
-﻿using BLL.Interface.Entities;
-using BLL.Interface.Interfaces;
-using BLL.ServiceImplementation;
-using DAI.Fake;
-using DAI.Interface.Interfaces;
-using DAI.Repositories;
-using Ninject;
-
-namespace DependencyResolver
+﻿namespace DependencyResolver
 {
+    using BLL.Interface.Entities;
+    using BLL.Interface.Interfaces;
+    using BLL.ServiceImplementation;
+    using DAI.Fake;
+    using DAI.Interface.Interfaces;
+    using DAI.Repositories;
+    using Ninject;
+
     public static class ResolverConfig
     {
         public static void ConfigurateResolver(this IKernel kernel)

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using DAI.Interface.Interfaces;
-
-namespace DAI.Repositories
+﻿namespace DAI.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using DAI.Interface.Interfaces;
+
     public class AccountBinaryRepository<T> : IRepository<T> where T : class
     {
         /// <summary>

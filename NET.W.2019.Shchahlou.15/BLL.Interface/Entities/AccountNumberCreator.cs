@@ -1,7 +1,7 @@
-﻿using BLL.Interface.Interfaces;
-
-namespace BLL.Interface.Entities
+﻿namespace BLL.Interface.Entities
 {
+    using BLL.Interface.Interfaces;
+
     public class AccountNumberCreator : IAccountNumberCreateService
     {
         /// <summary>

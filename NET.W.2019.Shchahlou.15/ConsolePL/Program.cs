@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using BLL.Interface.Entities;
-using BLL.Interface.Interfaces;
-using DependencyResolver;
-using Ninject;
-
-namespace ConsolePL
+﻿namespace ConsolePL
 {
+    using System;
+    using System.Linq;
+    using BLL.Interface.Entities;
+    using BLL.Interface.Interfaces;
+    using DependencyResolver;
+    using Ninject;
+
     public class Program
     {
         private static readonly IKernel Resolver;

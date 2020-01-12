@@ -1,8 +1,8 @@
-﻿using System;
-using BLL.Interface.Interfaces;
-
-namespace BLL.Interface.Entities
+﻿namespace BLL.Interface.Entities
 {
+    using System;
+    using BLL.Interface.Interfaces;
+
     public abstract class Account : IAccount
     {
         protected Func<decimal, double> depositeMoneyToBallsDelegate;

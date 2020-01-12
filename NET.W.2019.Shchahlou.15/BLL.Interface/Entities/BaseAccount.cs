@@ -1,6 +1,4 @@
-﻿using BLL.Interface.Interfaces;
-
-namespace BLL.Interface.Entities
+﻿namespace BLL.Interface.Entities
 {
     /// <summary>
     /// Minimal costOfDeposit

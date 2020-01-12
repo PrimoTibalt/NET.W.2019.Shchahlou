@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace DAI.Interface.Interfaces
+﻿namespace DAI.Interface.Interfaces
 {
+    using System.Collections.Generic;
+
     public interface IRepository<T>
     {
         List<T> GetAccountsList();

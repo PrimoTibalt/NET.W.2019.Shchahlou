@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using BLL.Interface.Entities;
-using BLL.Interface.Interfaces;
-using DAI.Interface.Interfaces;
-
-namespace BLL.ServiceImplementation
+﻿namespace BLL.ServiceImplementation
 {
+    using System;
+    using System.Collections.Generic;
+    using BLL.Interface.Entities;
+    using BLL.Interface.Interfaces;
+    using DAI.Interface.Interfaces;
+    
+    /// <summary>
+    /// Class to service accounts and manage them in repository.
+    /// </summary>
     public class AccountService : IAccountService
     {
         protected int accountsCount = 0;
