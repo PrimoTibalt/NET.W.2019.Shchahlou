@@ -25,6 +25,10 @@
             this.CurrentStorage = storage;
         }
 
+        /// <summary>
+        /// Adds input books at the end of file in storage.
+        /// </summary>
+        /// <param name="books"></param>
         public void AddToStorage(params Book[] books)
         {
             if (books == null)
@@ -35,6 +39,10 @@
             this.CurrentStorage.Write(books);
         }
 
+        /// <summary>
+        /// Deletes input books from current storage.
+        /// </summary>
+        /// <param name="books"></param>
         public void DeleteFromStorage(params Book[] books)
         {
             if (books == null)
@@ -45,6 +53,10 @@
             this.CurrentStorage.Delete(books);
         }
 
+        /// <summary>
+        /// Deletes books from storage and writes input books.
+        /// </summary>
+        /// <param name="books"></param>
         public void UpdateAllStorage(Book[] books)
         {
             if (books == null)
@@ -55,6 +67,10 @@
             this.CurrentStorage.FullUpdate(books);
         }
 
+        /// <summary>
+        /// Get information from current storage.
+        /// </summary>
+        /// <returns>Array of books from current storage.</returns>
         public Book[] ReadFromStorage()
         {
             Book[] books = this.CurrentStorage.ReadFromStorage();

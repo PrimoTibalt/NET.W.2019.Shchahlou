@@ -23,7 +23,7 @@
         private BookListStorage storage;
 
         /// <summary>
-        /// 
+        /// Implement BookListService.
         /// </summary>
         /// <param name="books"></param>
         /// <param name="filePathForStorage"></param>
@@ -46,11 +46,15 @@
                 throw new ArgumentException("Have this book in the collection.");
             }
 
-            booksToAdd.Add(newBook);
-            collection.Add(newBook);
-            isbnBook[newBook.ISBNGet()] = newBook;
+            this.booksToAdd.Add(newBook);
+            this.collection.Add(newBook);
+            this.isbnBook[newBook.ISBNGet()] = newBook;
         }
 
+        /// <summary>
+        /// Removes from local and adds in booksToRemove.
+        /// </summary>
+        /// <param name="removeBook"></param>
         public void RemoveBook(Book removeBook)
         {
             if (!this.HaveBookInCol(removeBook))
@@ -58,14 +62,19 @@
                 throw new ArgumentException("Dont have this book in the collection.");
             }
 
-            RemoveFromCollections(removeBook);
-            booksToRemove.Add(removeBook);
+            this.RemoveFromCollections(removeBook);
+            this.booksToRemove.Add(removeBook);
         }
 
+        /// <summary>
+        /// Sorts collection, set sorted equal to true.
+        /// </summary>
+        /// <param name="comparer"></param>
+        /// <returns>sorted collection</returns>
         public Book[] SortBooksByTag(IComparer<Book> comparer)
         {
-            collection.Sort(comparer);
-            sorted = true;
+            this.collection.Sort(comparer);
+            this.sorted = true;
             return collection.ToArray();
         }
 
@@ -82,10 +91,10 @@
             switch (parameter.ToUpperInvariant())
             {
                 case "ISBN":
-                    result.Add(isbnBook[value]);
+                    result.Add(this.isbnBook[value]);
                     break;
                 case "AUTHOR":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (b.Author.Contains(value))
                         {
@@ -95,7 +104,7 @@
 
                     break;
                 case "NAME":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (b.Name.Contains(value))
                         {
@@ -105,7 +114,7 @@
 
                     break;
                 case "PUBLISHER":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (b.Publisher.Contains(value))
                         {
@@ -115,7 +124,7 @@
 
                     break;
                 case "YEAR":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (int.Parse(value) == b.Year)
                         {
@@ -125,7 +134,7 @@
 
                     break;
                 case "NUMBEROFPAGES":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (int.Parse(value) == b.NumberOfPages)
                         {
@@ -135,7 +144,7 @@
 
                     break;
                 case "COST":
-                    foreach (Book b in collection)
+                    foreach (Book b in this.collection)
                     {
                         if (decimal.Parse(value) == b.Cost)
                         {
@@ -151,19 +160,28 @@
             return result.ToArray();
         }
 
+        /// <summary>
+        /// If storage is sorted, than updates all the storage.
+        /// if storage isnt sorted, than addes and after that deletes books.
+        /// </summary>
         public void UpdateStorage()
         {
-            if (sorted)
+            if (this.sorted)
             {
-                storage.UpdateAllStorage(collection.ToArray());
+                this.storage.UpdateAllStorage(collection.ToArray());
             }
             else
             {
-                storage.AddToStorage(booksToAdd.ToArray());
-                storage.DeleteFromStorage(booksToRemove.ToArray());
+                this.storage.AddToStorage(booksToAdd.ToArray());
+                this.storage.DeleteFromStorage(booksToRemove.ToArray());
+                this.booksToAdd.Clear();
+                booksToRemove.Clear();
             }
         }
 
+        /// <summary>
+        /// Show books from class collection.
+        /// </summary>
         public void ShowLocal()
         {
             foreach (var book in this.collection)
@@ -172,6 +190,9 @@
             }
         }
 
+        /// <summary>
+        /// Show books from storage collection.
+        /// </summary>
         public void ShowStorage()
         {
             Book[] booksFromStorage = this.storage.ReadFromStorage();
@@ -181,16 +202,26 @@
             }
         }
 
+        /// <summary>
+        /// Checks does we have input book in local collection.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
         private bool HaveBookInCol(Book book)
         {
-            return isbnBook.ContainsKey(book.ISBNGet());
+            return this.isbnBook.ContainsKey(book.ISBNGet());
         }
 
+        /// <summary>
+        /// Used by RemoveBook.
+        /// Removes from local collection, from booksToAdd and from isbnBook.
+        /// </summary>
+        /// <param name="book"></param>
         private void RemoveFromCollections(Book book)
         {
-            collection.Remove(book);
-            booksToAdd.Remove(book);
-            isbnBook.Remove(book.ISBNGet());
+            this.collection.Remove(book);
+            this.booksToAdd.Remove(book);
+            this.isbnBook.Remove(book.ISBNGet());
         }
     }
 }
