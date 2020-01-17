@@ -13,13 +13,13 @@
     {
         protected int accountsCount = 0;
 
-        protected IRepository<IAccount> repos;
+        protected IRepository<Account> repos;
 
         /// <summary>
         /// Set repos equal to repository
         /// </summary>
         /// <param name="repository"></param>
-        public AccountService(IRepository<IAccount> repository)
+        public AccountService(IRepository<Account> repository)
         {
             if (repository != null)
             {
@@ -37,7 +37,7 @@
         /// <param name="number"></param>
         public void CloseAccount(long number)
         {
-            IAccount acc = FindAccount(number);
+            Account acc = FindAccount(number);
             if (acc.Money > 0)
             {
                 repos.DeleteAccount(acc);
@@ -53,7 +53,7 @@
         /// Get all created accounts, calls GetAccountsList.
         /// </summary>
         /// <returns></returns>
-        public List<IAccount> GetAllAccounts()
+        public List<Account> GetAllAccounts()
         {
             return repos.GetAccountsList();
         }
@@ -66,7 +66,7 @@
         /// <param name="creator">Creates number for account</param>
         public void OpenAccount(string name, AccountType type, IAccountNumberCreateService creator)
         {
-            IAccount acc;
+            Account acc;
             switch (type)
             { 
                 case AccountType.Base: 
@@ -96,7 +96,6 @@
         {
             IAccount acc = FindAccount(number);
             acc.WithdrawMoneyToBalls(money);
-            acc.Money -= money;
         }
 
         /// <summary>
@@ -108,18 +107,17 @@
         {
             IAccount acc = FindAccount(number);
             acc.DepositeMoneyToBalls(money);
-            acc.Money += money;
         }
 
         /// <summary>
-        /// Search account by number in repository
+        /// Search account by number in repository.
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        protected IAccount FindAccount(long number)
+        protected Account FindAccount(long number)
         {
-            IAccount account = null;
-            foreach (IAccount acc in repos.GetAccountsList())
+            Account account = null;
+            foreach (Account acc in repos.GetAccountsList())
             {
                 if (acc.AccountNumber == number)
                 {
@@ -133,7 +131,7 @@
                 throw new ArgumentException("Have no accounts with such number.");
             }
 
-            return new BaseAccount("Change", 30);
+            return account;
         }
     }
 }

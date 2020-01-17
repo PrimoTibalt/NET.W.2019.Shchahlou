@@ -15,7 +15,7 @@
             kernel.Bind<IAccountService>().To<AccountService>();
 
             // kernel.Bind<IRepository>().To<FakeRepository>();
-            kernel.Bind<IRepository<IAccount>>().To<AccountBinaryRepository<IAccount>>().WithConstructorArgument("test.bin");
+            kernel.Bind<IRepository<Account>>().To<AccountBinaryRepository<Account>>().WithConstructorArgument("test.bin");
             kernel.Bind<IAccountNumberCreateService>().To<AccountNumberCreator>().InSingletonScope();
 
             // kernel.Bind<IApplicationSettings>().To<ApplicationSettings>();

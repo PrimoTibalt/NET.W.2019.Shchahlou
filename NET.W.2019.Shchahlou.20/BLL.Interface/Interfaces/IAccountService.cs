@@ -14,7 +14,7 @@ namespace BLL.Interface.Interfaces
     {
         void OpenAccount(string name, AccountType type, IAccountNumberCreateService creator);
 
-        List<IAccount> GetAllAccounts();
+        List<Account> GetAllAccounts();
 
         void DepositAccount(long acc, decimal money);
 

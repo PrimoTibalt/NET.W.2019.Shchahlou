@@ -2,10 +2,13 @@
 {
     using System;
     using System.Linq;
+    using System.Data;
     using BLL.Interface.Entities;
     using BLL.Interface.Interfaces;
+    using DAL.Repositories;
     using DependencyResolver;
     using Ninject;
+    using System.Data.Entity;
 
     public class Program
     {
@@ -46,8 +49,15 @@
 
             foreach (var item in service.GetAllAccounts())
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item.Balls);
             }
+           
+            using (var db = new DatabaseRepository())
+            {
+                service.GetAllAccounts().ForEach((acc) => db.accounts.Add(acc));
+                db.SaveChanges();
+            }
+            Console.WriteLine("Clear!");
 
             Console.ReadKey();
         }

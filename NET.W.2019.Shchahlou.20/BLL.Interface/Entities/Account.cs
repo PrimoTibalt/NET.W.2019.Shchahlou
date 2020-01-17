@@ -2,8 +2,12 @@
 {
     using System;
     using BLL.Interface.Interfaces;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
 
-    public abstract class Account : IAccount
+    [Table("AccountInfo")]
+    public class Account : IAccount
     {
         protected Func<decimal, double> depositeMoneyToBallsDelegate;
 
@@ -41,11 +45,25 @@
             }
         }
 
-        public decimal Money { get; set; }
+        public decimal Money
+        {
+            get
+            {
+                return this.money;
+            }
+        }
 
-        public double Balls { get; }
+        public double Balls
+        {
+            get
+            {
+                return balls;
+            }
+        }
 
-        public long AccountNumber { get; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long AccountNumber { get; set; }
 
         /// <summary>
         /// Add balls from money to deposite.
@@ -53,6 +71,7 @@
         /// <param name="money"></param>
         public virtual void DepositeMoneyToBalls(decimal money)
         {
+            this.money += money;
             depositeMoneyToBallsDelegate += (cash) => (double)cash * costOfDeposite;
             if (costOfWithdraw > 0)
             {
@@ -70,10 +89,11 @@
         /// <param name="money"></param>
         public virtual void WithdrawMoneyToBalls(decimal money)
         {
+            this.money -= money;
             withdrawMoneyToBallsDelegate += (cash) => (double)cash * costOfWithdraw;
-            if ((this.balls - withdrawMoneyToBallsDelegate(money)) > 0)
+            if ((withdrawMoneyToBallsDelegate(money)) > 0)
             {
-                this.balls -= withdrawMoneyToBallsDelegate(money);
+                this.balls += withdrawMoneyToBallsDelegate(money);
             }
             else
             {

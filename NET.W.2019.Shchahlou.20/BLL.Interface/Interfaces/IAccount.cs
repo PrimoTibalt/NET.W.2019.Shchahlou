@@ -6,7 +6,7 @@
 
         long AccountNumber { get; }
 
-        decimal Money { get; set; }
+        decimal Money { get; }
 
         double Balls { get; }
 
